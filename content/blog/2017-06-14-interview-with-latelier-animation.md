@@ -1,14 +1,14 @@
 ---
-title: Interview with L’Atelier Animation
-created_at: 2017-06-14
+title: 与L'动画工作室面试
+date: 2017-06-14
 kind: article
 author_name: Brian Brazil
 ---
 
-*Continuing our series of interviews with users of Prometheus, Philippe Panaite
+_Continuing our series of interviews with users of Prometheus, Philippe Panaite
 and Barthelemy Stevens from L’Atelier Animation talk about how they switched
 their animation studio from a mix of Nagios, Graphite and InfluxDB to
-Prometheus.*
+Prometheus._
 
 ## Can you tell us about yourself and what L’Atelier Animation does?
 
@@ -19,36 +19,33 @@ the beautiful city of Montreal Canada. Our first feature film
 
 We’re currently hard at work on an animated TV series and on our second feature
 film.
- 
+
 Our infrastructure consists of around 300 render blades, 150 workstations and
 twenty various servers. With the exception of a couple of Macs, everything runs
-on Linux ([CentOS](https://www.centos.org/)) and not a single Windows machine.   
+on Linux ([CentOS](https://www.centos.org/)) and not a single Windows machine.
 
- 
 ## What was your pre-Prometheus monitoring experience?
- 
+
 At first we went with a mix of [Nagios](https://www.nagios.org/),
 [Graphite](https://graphiteapp.org/), and
-[InfluxDB](https://www.influxdata.com).  The initial setup was “ok” but nothing
-special and over complicated (too many moving parts).   
-
+[InfluxDB](https://www.influxdata.com). The initial setup was “ok” but nothing
+special and over complicated (too many moving parts).
 
 ## Why did you decide to look at Prometheus?
- 
+
 When we switched all of our services to CentOS 7, we looked at new monitoring
 solutions and Prometheus came up for many reasons, but most importantly:
 
-  * Node Exporter: With its customization capabilities, we can fetch any data from clients
-  * SNMP support: Removes the need for a 3rd party SNMP service
-  * Alerting system: ByeBye Nagios
-  * [Grafana](https://grafana.com/) support
-
+- Node Exporter: With its customization capabilities, we can fetch any data from clients
+- SNMP support: Removes the need for a 3rd party SNMP service
+- Alerting system: ByeBye Nagios
+- [Grafana](https://grafana.com/) support
 
 ## How did you transition?
 
 When we finished our first film we had a bit of a downtime so it was a perfect
 opportunity for our IT department to make big changes. We decided to flush our
-whole monitoring system as it was not as good as we wanted.   
+whole monitoring system as it was not as good as we wanted.
 
 One of the most important part is to monitor networking equipment so we started
 by configuring [snmp_exporter](https://github.com/prometheus/snmp_exporter/) to
@@ -77,20 +74,19 @@ Our specific needs require us to monitor custom data from clients, it’s made
 easy through the use of node_exporter’s [textfile
 collector](https://github.com/prometheus/node_exporter#textfile-collector)
 function. A cronjob outputs specific data from any given tool into a
-pre-formatted text file in a format readable by Prometheus.   
+pre-formatted text file in a format readable by Prometheus.
 
 Since all the data is available through the HTTP protocol, we wrote a
 [Python](https://www.python.org/) script to fetch data from Prometheus. We
 store it in a [MySQL](https://www.mysql.com/) database accessed via a web
 application that creates a live floor map. This allows us to know with a simple
-mouse over which user is seated where with what type of hardware.  We also
+mouse over which user is seated where with what type of hardware. We also
 created another page with user’s picture & department information, it helps
-new employees know who’s their neighbour.  The website is still an ongoing
+new employees know who’s their neighbour. The website is still an ongoing
 project so please don’t judge the look, we’re sysadmins after all not web
 designers :-)
 
 ![Floormap with workstation detail](/assets/blog/2017-06-14/floormap.png)
-
 
 ## What improvements have you seen since switching?
 
@@ -98,7 +94,6 @@ It gave us an opportunity to change the way we monitor everything in the studio
 and inspired us to create a new custom floor map with all the data which has
 been initially fetched by Prometheus. The setup is a lot simpler with one
 service to rule them all.
-
 
 ## What do you think the future holds for L’Atelier Animation and Prometheus?
 

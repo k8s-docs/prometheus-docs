@@ -1,9 +1,7 @@
 ---
-title: Remote write tuning
-sort_rank: 8
+title: 远程写调整
+weight: 8
 ---
-
-# Remote write tuning
 
 Prometheus implements sane defaults for remote write, but many users have
 different requirements and would like to optimize their remote settings.
@@ -41,8 +39,7 @@ of series ID to label values, causing large amounts of series churn to
 significantly increase memory usage.
 
 In addition to the series cache, each shard and its queue increases memory
-usage. Shard memory is proportional to the `number of shards * (capacity +
-max_samples_per_send)`. When tuning, consider reducing `max_shards` alongside
+usage. Shard memory is proportional to the `number of shards * (capacity + max_samples_per_send)`. When tuning, consider reducing `max_shards` alongside
 increases to `capacity` and `max_samples_per_send` to avoid inadvertantly
 running out of memory. The default values for `capacity` and
 `max_samples_per_send` will constrain shard memory usage to less than 100 kB per

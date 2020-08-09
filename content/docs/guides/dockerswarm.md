@@ -1,14 +1,12 @@
 ---
 title: Docker Swarm
-sort_rank: 1
+weight: 1
+description: >
+  Prometheus 可以在 Docker Swarm 集群发现目标, 作为 v2.20.0 的.
+  本指南演示如何使用该服务发现机制.
 ---
 
-# Docker Swarm
-
-Prometheus can discover targets in a [Docker Swarm][swarm] cluster, as of
-v2.20.0. This guide demonstrates how to use that service discovery mechanism.
-
-## Docker Swarm service discovery architecture
+## [Docker Swarm][swarm] 服务发现架构
 
 The [Docker Swarm service discovery][swarmsd] contains 3 different roles: nodes, services,
 and tasks.
@@ -29,13 +27,13 @@ Prometheus will only discover tasks and service that expose ports.
 
 NOTE: The rest of this post assumes that you have a Swarm running.
 
-## Setting up Prometheus
+## 配置 Prometheus
 
 For this guide, you need to [setup Prometheus][setup]. We will assume that
 Prometheus runs on a Docker Swarm manager node and has access to the Docker
 socket at `/var/run/docker.sock`.
 
-## Monitoring Docker daemons
+## 监控 Docker 守护进程
 
 Let's dive into the service discovery itself.
 
@@ -47,8 +45,8 @@ following properties:
 
 ```json
 {
-  "metrics-addr" : "0.0.0.0:9323",
-  "experimental" : true
+  "metrics-addr": "0.0.0.0:9323",
+  "experimental": true
 }
 ```
 
@@ -61,16 +59,15 @@ The [Docker documentation][dockermetrics] contains more info about this.
 Then, you can configure Prometheus to scrape the Docker daemon, by providing the
 following `prometheus.yml` file:
 
-
 ```yaml
 scrape_configs:
   # Make Prometheus scrape itself for metrics.
-  - job_name: 'prometheus'
+  - job_name: "prometheus"
     static_configs:
-    - targets: ['localhost:9090']
+      - targets: ["localhost:9090"]
 
   # Create a job for Docker daemons.
-  - job_name: 'docker'
+  - job_name: "docker"
     dockerswarm_sd_configs:
       - host: unix:///var/run/docker.sock
         role: nodes
@@ -89,7 +86,7 @@ For the nodes role, you can also use the `port` parameter of
 enables Prometheus to reuse the same API calls across identical Docker Swarm
 configurations.
 
-## Monitoring Containers
+## 监控容器
 
 Let's now deploy a service in our Swarm. We will deploy [cadvisor][cad], which
 exposes container resources metrics:
@@ -110,12 +107,12 @@ This is a minimal `prometheus.yml` file to monitor it:
 ```yaml
 scrape_configs:
   # Make Prometheus scrape itself for metrics.
-  - job_name: 'prometheus'
+  - job_name: "prometheus"
     static_configs:
-    - targets: ['localhost:9090']
+      - targets: ["localhost:9090"]
 
   # Create a job for Docker Swarm containers.
-  - job_name: 'dockerswarm'
+  - job_name: "dockerswarm"
     dockerswarm_sd_configs:
       - host: unix:///var/run/docker.sock
         role: tasks
@@ -134,7 +131,6 @@ scrape_configs:
 ```
 
 Let's analyze each part of the [relabel configuration][rela].
-
 
 ```yaml
 - source_labels: [__meta_dockerswarm_task_desired_state]
@@ -156,7 +152,6 @@ When we deployed our cadvisor, we have added a label `prometheus-job=cadvisor`.
 As Prometheus fetches the tasks labels, we can instruct it to **only** keep the
 targets which have a `prometheus-job` label.
 
-
 ```yaml
 - source_labels: __meta_dockerswarm_service_label_prometheus_job
   target_label: job
@@ -166,12 +161,12 @@ That last part takes the label `prometheus-job` of the task and turns it into
 a target label, overwriting the default `dockerswarm` job label that comes from
 the scrape config.
 
-## Discovered labels
+## 发现标签
 
 The [Prometheus Documentation][swarmsd] contains the full list of labels, but
 here are other relabel configs that you might find useful.
 
-### Scraping metrics via a certain network only
+### 只经由特定网络刮指标
 
 ```yaml
 - source_labels: [__meta_dockerswarm_network_name]
@@ -179,7 +174,7 @@ here are other relabel configs that you might find useful.
   action: keep
 ```
 
-### Scraping global tasks only
+### 只刮全局任务
 
 Global tasks run on every daemon.
 
@@ -192,14 +187,14 @@ Global tasks run on every daemon.
   action: keep
 ```
 
-### Adding a docker_node label to the targets
+### 添加 docker_node 标签到目标
 
 ```yaml
 - source_labels: [__meta_dockerswarm_node_hostname]
   target_label: docker_node
 ```
 
-## Connecting to the Docker Swarm
+## 连接到 Docker Swarm
 
 The above `dockerswarm_sd_configs` entries have a field host:
 
@@ -211,7 +206,7 @@ That is using the Docker socket. Prometheus offers [additional configuration
 options][swarmsd] to connect to Swarm using HTTP and HTTPS, if you prefer that
 over the unix socket.
 
-## Conclusion
+## 结论
 
 There are many discovery labels you can play with to better determine which
 targets to monitor and how, for the tasks, there is more than 25 labels
@@ -221,10 +216,10 @@ Prometheus server (under the "Status" menu) to see all the discovered labels.
 The service discovery makes no assumptions about your Swarm stack, in such a way
 that given proper configuration, this should be pluggable to any existing stack.
 
-[state]:https://docs.docker.com/engine/swarm/how-swarm-mode-works/swarm-task-states/
-[rela]:https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
-[swarm]:https://docs.docker.com/engine/swarm/
-[swarmsd]:https://prometheus.io/docs/prometheus/latest/configuration/configuration/#dockerswarm_sd_config
-[dockermetrics]:https://docs.docker.com/config/daemon/prometheus/
-[cad]:https://github.com/google/cadvisor
-[setup]:https://prometheus.io/docs/prometheus/latest/getting_started/
+[state]: https://docs.docker.com/engine/swarm/how-swarm-mode-works/swarm-task-states/
+[rela]: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
+[swarm]: https://docs.docker.com/engine/swarm/
+[swarmsd]: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#dockerswarm_sd_config
+[dockermetrics]: https://docs.docker.com/config/daemon/prometheus/
+[cad]: https://github.com/google/cadvisor
+[setup]: https://prometheus.io/docs/prometheus/latest/getting_started/

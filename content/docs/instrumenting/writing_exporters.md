@@ -1,9 +1,7 @@
 ---
-title: Writing exporters
-sort_rank: 5
+title: 写作出口商
+weight: 5
 ---
-
-# Writing exporters
 
 If you are instrumenting your own code, the [general rules of how to
 instrument code with a Prometheus client
@@ -47,7 +45,7 @@ metrics.
 
 When working with applications, you should aim for an exporter that
 requires no custom configuration by the user beyond telling it where the
-application is.  You may also need to offer the ability to filter out
+application is. You may also need to offer the ability to filter out
 certain metrics if they may be too granular and expensive on large
 setups, for example the [HAProxy
 exporter](https://github.com/prometheus/haproxy_exporter) allows
@@ -66,7 +64,7 @@ need the ability to let the user select which metrics they want to pull
 out.
 
 In other cases, metrics from the system are completely non-standard,
-depending on the usage of the system and the underlying application.  In
+depending on the usage of the system and the underlying application. In
 that case the user has to tell us how to transform the metrics. The [JMX
 exporter](https://github.com/prometheus/jmx_exporter) is the worst
 offender here, with the
@@ -89,9 +87,9 @@ Follow the [best practices on metric naming](/docs/practices/naming).
 
 Generally metric names should allow someone who is familiar with
 Prometheus but not a particular system to make a good guess as to what a
-metric means.  A metric named `http_requests_total` is not extremely
+metric means. A metric named `http_requests_total` is not extremely
 useful - are these being measured as they come in, in some filter or
-when they get to the user’s code?  And `requests_total` is even worse,
+when they get to the user’s code? And `requests_total` is even worse,
 what type of requests?
 
 With direct instrumentation, a given metric should exist within exactly
@@ -191,7 +189,7 @@ a label. This is usually because you care about only one of them at a
 time, and it is easier to use them that way.
 
 The rule of thumb is that one metric should make sense when summed or
-averaged.  There is one other case that comes up with exporters, and
+averaged. There is one other case that comes up with exporters, and
 that’s where the data is fundamentally tabular and doing otherwise would
 require users to do regexes on metric names to be usable. Consider the
 voltage sensors on your motherboard, while doing math across them is
@@ -359,7 +357,7 @@ a label value disappears, it’ll still be exported.
 
 Instrumenting your exporter itself via direct instrumentation is fine,
 e.g. total bytes transferred or calls performed by the exporter across
-all scrapes.  For exporters such as the [blackbox
+all scrapes. For exporters such as the [blackbox
 exporter](https://github.com/prometheus/blackbox_exporter) and [SMNP
 exporter](https://github.com/prometheus/snmp_exporter), which aren’t
 tied to a single target, these should only be exposed on a vanilla
@@ -402,8 +400,8 @@ another one for the master, if a machine has both.
 
 The theory behind this is that for direct instrumentation this is what
 you’d be doing, and we’re trying to get as close to that as we can in
-other layouts.  This means that all service discovery is done in
-Prometheus, not in exporters.  This also has the benefit that Prometheus
+other layouts. This means that all service discovery is done in
+Prometheus, not in exporters. This also has the benefit that Prometheus
 has the target information it needs to allow users probe your service
 with the [blackbox
 exporter](https://github.com/prometheus/blackbox_exporter).
@@ -464,7 +462,7 @@ There are two considerations here.
 
 Firstly, when do you expire metrics? Collectd and things talking to
 Graphite both export regularly, and when they stop we want to stop
-exposing the metrics.  Collectd includes an expiry time so we use that,
+exposing the metrics. Collectd includes an expiry time so we use that,
 Graphite doesn’t so it is a flag on the exporter.
 
 StatsD is a bit different, as it is dealing with events rather than

@@ -1,6 +1,6 @@
 ---
-title: Announcing Prometheus 2.0
-created_at: 2017-11-08
+title: 宣布 Prometheus 2.0
+date: 2017-11-08
 kind: article
 author_name: Fabian Reinartz on behalf of the Prometheus team
 ---
@@ -27,9 +27,9 @@ In early 2017, things started moving under the hood. What first began as an expe
 Over the past six months we have been busy stabilizing this work as an [independent time series database](https://www.youtube.com/watch?v=b_pEevMAC3I&list=PLoz-W_CUquUlnvoEBbqChb7A0ZEZsWSXt&index=29) and re-integrating this into Prometheus itself.
 The result is a significantly better performing Prometheus 2.0 with improvements along virtually all dimensions. Query latency is more consistent and it especially scales better in the face of high series churn. Resource consumption, as measured in different real-world production scenarios, also decreased significantly:
 
-* **CPU usage** reduced to **20% - 40%** compared to Prometheus 1.8
-* **Disk space usage** reduced to **33% - 50%** compared to Prometheus 1.8
-* **Disk I/O** without much query load is usually **<1%** on average
+- **CPU usage** reduced to **20% - 40%** compared to Prometheus 1.8
+- **Disk space usage** reduced to **33% - 50%** compared to Prometheus 1.8
+- **Disk I/O** without much query load is usually **<1%** on average
 
 ![Prometheus 1.8 vs 2.0 resource comparison](/assets/blog/2017-11-08/resource-comparison.png)
 

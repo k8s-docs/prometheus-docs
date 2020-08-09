@@ -1,12 +1,12 @@
 ---
-title: Interview with Datawire
-created_at: 2018-03-16
+title: 采访Datawire
+date: 2018-03-16
 kind: article
 author_name: Brian Brazil
 ---
 
-*Continuing our series of interviews with users of Prometheus, Richard Li
-from Datawire talks about how they transitioned to Prometheus.*
+_Continuing our series of interviews with users of Prometheus, Richard Li
+from Datawire talks about how they transitioned to Prometheus._
 
 ## Can you tell us about yourself and what Datawire does?
 
@@ -28,8 +28,7 @@ We used AWS CloudWatch. This was easy to set up, but we found that as we
 adopted a more distributed development model (microservices), we wanted more
 flexibility and control. For example, we wanted each team to be able to
 customize their monitoring on an as-needed basis, without requiring operational
-help. 
-
+help.
 
 ## Why did you decide to look at Prometheus?
 
@@ -43,7 +42,6 @@ requirement was a strong ecosystem. A strong ecosystem generally means
 established (and documented) best practices, continued development, and lots of
 people who can help if you get stuck.
 
-
 Prometheus, and in particular, the [Prometheus
 Operator](https://github.com/coreos/prometheus-operator), fit our requirements.
 With the Prometheus Operator, each developer can create their own Prometheus
@@ -51,7 +49,6 @@ instance as needed, without help from operations (no bottleneck!). We are also
 members of the [CNCF](https://www.cncf.io/) with a lot of experience with the
 Kubernetes and Envoy communities, so looking at another CNCF community in
 Prometheus was a natural fit.
-
 
 ![Datawire's Ambassador dashboards](/assets/blog/2018-03-16/dashboard.png)
 
@@ -63,7 +60,6 @@ using the statsd protocol. We installed the Prometheus Operator (some detailed
 notes [here](https://www.datawire.io/faster/ambassador-prometheus/)) and configured it to start collecting stats
 from Envoy. We also set up a Grafana dashboard [based on some
 work](https://grafana.com/dashboards/4698/) from another Ambassador contributor.
-
 
 ## What improvements have you seen since switching?
 

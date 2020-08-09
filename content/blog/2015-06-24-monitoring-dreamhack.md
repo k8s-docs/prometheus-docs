@@ -1,11 +1,11 @@
 ---
-title: Monitoring DreamHack - the World's Largest Digital Festival
-created_at: 2015-06-24
+title: 监测的DreamHack  - 世界上最大的数字音乐节
+date: 2015-06-24
 kind: article
 author_name: Christian Svensson (DreamHack Network Team)
 ---
 
-*Editor's note: This article is a guest post written by a Prometheus user.*
+_Editor's note: This article is a guest post written by a Prometheus user._
 
 **If you are operating the network for 10,000's of demanding gamers, you need to
 really know what is going on inside your network. Oh, and everything needs to be
@@ -13,7 +13,7 @@ built from scratch in just five days.**
 
 If you have never heard about [DreamHack](http://www.dreamhack.se/) before, here
 is the pitch: Bring 20,000 people together and have the majority of them bring
-their own computer.  Mix in professional gaming (eSports), programming contests,
+their own computer. Mix in professional gaming (eSports), programming contests,
 and live music concerts. The result is the world's largest festival dedicated
 solely to everything digital.
 
@@ -25,14 +25,15 @@ electricity distribution, setting up stores for food and drinks, and even
 building the actual tables.
 
 The team that builds and operates everything related to the network is
-officially called the Network team, but we usually refer to ourselves as *tech*
-or *dhtech*. This post is going to focus on the work of dhtech and how we used
+officially called the Network team, but we usually refer to ourselves as _tech_
+or _dhtech_. This post is going to focus on the work of dhtech and how we used
 Prometheus during DreamHack Summer 2015 to try to kick our monitoring up another
 notch.
 
 <!-- more -->
 
 ## The equipment
+
 Turns out that to build a highly performant network for 10,000+
 computers, you need at least the same number of network ports. In our case these
 come in the form of ~400 Cisco 2950 switches. We call these the access switches.
@@ -40,6 +41,7 @@ These are everywhere in the venue where participants will be seated with their
 computers.
 
 [![Access switches](https://c1.staticflickr.com/9/8487/8206439882_4739d39a9c_c.jpg)](https://www.flickr.com/photos/dreamhack/8206439882)
+
 <center>*Dutifully standing in line, the access switches are ready to greet the
 DreamHackers with high-speed connectivity.*</center>
 
@@ -56,6 +58,7 @@ other infrastructure. When completed, our core looks something like the image
 below.
 
 [![Network planning map](/assets/dh_network_planning_map.png)](/assets/dh_network_planning_map.png)
+
 <center>*The planning map for the distribution and core layers. The core is
 clearly visible in "Hall D"*</center>
 
@@ -63,6 +66,7 @@ All in all this is becoming a lengthy list of stuff to monitor, so let's get to
 the reason you're here: How do we make sure we know what's going on?
 
 ## Introducing: dhmon
+
 dhmon is the collective name of the systems that not only
 monitor the network, but also allow other teams to collect metrics on whatever
 they want.
@@ -88,6 +92,7 @@ InfluxDB-based metrics store that we had written with Prometheus. Spoiler: We're
 not going back.
 
 ## The architecture
+
 The monitoring solution consists of three layers:
 collection, storage, presentation. Our most critical collectors are
 snmpcollector (SNMP) and ipplan-pinger (ICMP), closely followed by dhcpinfo
@@ -96,6 +101,7 @@ systems into [node_exporter](https://github.com/prometheus/node_exporter)'s
 textfile collector.
 
 [![dhmon Architecture](/assets/dh_dhmon_architecture.png)](/assets/dh_dhmon_architecture.png)
+
 <center>*The current architecture plan of dhmon as of Summer 2015*</center>
 
 We use Prometheus as a central timeseries storage and querying engine, but we
@@ -119,10 +125,12 @@ use Prometheus for this data as well - we will definitely try to replace our
 memcached with Prometheus at the next DreamHack.
 
 [![dhmon Visualization](/assets/dh_dhmon_visualization.png)](/assets/dh_dhmon_visualization.png)
+
 <center>*The overview of our access layer visualized by dhmon*</center>
 
 ## Prometheus setup
-The block that so far has been referred to as *Prometheus*
+
+The block that so far has been referred to as _Prometheus_
 really consists of three products:
 [Prometheus](https://github.com/prometheus/prometheus),
 [PromDash](https://github.com/prometheus/promdash), and
@@ -135,6 +143,7 @@ served by an Apache web server that just acts as a reverse proxy.
     ProxyPass /dash http://localhost:3000/dash
 
 ## Exploring the network
+
 Prometheus has a powerful querying engine that allows
 you to do pretty cool things with the streaming information collected from all
 over your network. However, sometimes the queries need to process too much data
@@ -152,6 +161,7 @@ After this, running `topk(5, precomputed_link_utilization_percent)` was
 blazingly fast.
 
 ## Being reactive: alerting
+
 So at this stage we had something we could query for
 the state of the network. Since we are humans, we don't want to spend our time
 running queries all the time to see if things are still running as they should,
@@ -196,10 +206,12 @@ We found the syntax to define alerts easy to read and understand even if you had
 no previous experience with Prometheus or time series databases.
 
 [![Prometheus alerts for DreamHack](/assets/dh_prometheus_alerts.png)](/assets/dh_prometheus_alerts.png)
+
 <center>*Oops! Turns out we have some bad uplinks, better run out and fix
 it!*</center>
 
 ## Being proactive: dashboards
+
 While alerting is an essential part of
 monitoring, sometimes you just want to have a good overview of the health of
 your network. To achieve this we used [PromDash](/docs/visualization/promdash/).
@@ -208,9 +220,11 @@ get the answer and saved it as a dashboard widget. The most interesting ones
 were then added to an overview dashboard that we proudly displayed.
 
 [![dhmon Dashboard](/assets/dh_dhmon_dashboard.png)](/assets/dh_dhmon_dashboard.png)
+
 <center>*The DreamHack Overview dashboard powered by PromDash*</center>
 
 ## The future
+
 While changing an integral part of any system is a complex job and
 we're happy that we managed to integrate Prometheus in just one event, there are
 without a doubt a lot of areas to improve. Some areas are pretty basic: using
@@ -234,6 +248,7 @@ and in the long run when Prometheus gets support for federation, utilize the
 off-site Prometheus to replicate the metrics from the event Prometheus.
 
 ## Closing words
+
 We're really excited about Prometheus and how easy it makes
 setting up scalable monitoring and alerting from scratch.
 

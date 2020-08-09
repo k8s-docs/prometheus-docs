@@ -1,6 +1,6 @@
 ---
-title: Console templates
-sort_rank: 3
+title: 控制台模板
+weight: 3
 ---
 
 # Console templates
@@ -111,16 +111,16 @@ argument is how to format the output. Only the first argument is required.
 
 Valid output formats for the third argument to `prom_query_drilldown`:
 
-* Not specified: Default Go display output.
-* `humanize`: Display the result using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
-* `humanizeNoSmallPrefix`: For absolute values greater than 1, display the
+- Not specified: Default Go display output.
+- `humanize`: Display the result using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
+- `humanizeNoSmallPrefix`: For absolute values greater than 1, display the
   result using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix). For
   absolute values less than 1, display 3 significant digits. This is useful
   to avoid units such as milliqueries per second that can be produced by
   `humanize`.
-* `humanize1024`: Display the humanized result using a base of 1024 rather than 1000.
+- `humanize1024`: Display the humanized result using a base of 1024 rather than 1000.
   This is usually used with `B` as the second argument to produce units such as `KiB` and `MiB`.
-* `printf.3g`: Display 3 significant digits.
+- `printf.3g`: Display 3 significant digits.
 
 Custom formats can be defined. See
 [prom.lib](https://github.com/prometheus/prometheus/blob/master/console_libraries/prom.lib) for examples.
@@ -143,34 +143,34 @@ The `head` template loads the required Javascript and CSS.
 
 Parameters to the graph library:
 
-| Name          | Description
-| ------------- | -------------
-| expr          | Required. Expression to graph. Can be a list.
-| node          | Required. DOM node to render into.
-| duration      | Optional. Duration of the graph. Defaults to 1 hour.
-| endTime       | Optional. Unixtime the graph ends at. Defaults to now.
-| width         | Optional. Width of the graph, excluding titles. Defaults to auto-detection.
-| height        | Optional. Height of the graph, excluding titles and legends. Defaults to 200 pixels.
-| min           | Optional. Minimum x-axis value. Defaults to lowest data value.
-| max           | Optional. Maximum y-axis value. Defaults to highest data value.
-| renderer      | Optional. Type of graph. Options are `line` and `area` (stacked graph). Defaults to `line`.
-| name          | Optional. Title of plots in legend and hover detail. If passed a string, `[[ label ]]` will be substituted with the label value. If passed a function, it will be passed a map of labels and should return the name as a string. Can be a list.
-| xTitle        | Optional. Title of the x-axis. Defaults to `Time`.
-| yUnits        | Optional. Units of the y-axis. Defaults to empty.
-| yTitle        | Optional. Title of the y-axis. Defaults to empty.
-| yAxisFormatter | Optional. Number formatter for the y-axis. Defaults to `PromConsole.NumberFormatter.humanize`.
-| yHoverFormatter | Optional. Number formatter for the hover detail. Defaults to `PromConsole.NumberFormatter.humanizeExact`.
-| colorScheme   | Optional. Color scheme to be used by the plots. Can be either a list of hex color codes or one of the [color scheme names](https://github.com/shutterstock/rickshaw/blob/master/src/js/Rickshaw.Fixtures.Color.js) supported by Rickshaw. Defaults to `'colorwheel'`.
+| Name            | Description                                                                                                                                                                                                                                                           |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| expr            | Required. Expression to graph. Can be a list.                                                                                                                                                                                                                         |
+| node            | Required. DOM node to render into.                                                                                                                                                                                                                                    |
+| duration        | Optional. Duration of the graph. Defaults to 1 hour.                                                                                                                                                                                                                  |
+| endTime         | Optional. Unixtime the graph ends at. Defaults to now.                                                                                                                                                                                                                |
+| width           | Optional. Width of the graph, excluding titles. Defaults to auto-detection.                                                                                                                                                                                           |
+| height          | Optional. Height of the graph, excluding titles and legends. Defaults to 200 pixels.                                                                                                                                                                                  |
+| min             | Optional. Minimum x-axis value. Defaults to lowest data value.                                                                                                                                                                                                        |
+| max             | Optional. Maximum y-axis value. Defaults to highest data value.                                                                                                                                                                                                       |
+| renderer        | Optional. Type of graph. Options are `line` and `area` (stacked graph). Defaults to `line`.                                                                                                                                                                           |
+| name            | Optional. Title of plots in legend and hover detail. If passed a string, `[[ label ]]` will be substituted with the label value. If passed a function, it will be passed a map of labels and should return the name as a string. Can be a list.                       |
+| xTitle          | Optional. Title of the x-axis. Defaults to `Time`.                                                                                                                                                                                                                    |
+| yUnits          | Optional. Units of the y-axis. Defaults to empty.                                                                                                                                                                                                                     |
+| yTitle          | Optional. Title of the y-axis. Defaults to empty.                                                                                                                                                                                                                     |
+| yAxisFormatter  | Optional. Number formatter for the y-axis. Defaults to `PromConsole.NumberFormatter.humanize`.                                                                                                                                                                        |
+| yHoverFormatter | Optional. Number formatter for the hover detail. Defaults to `PromConsole.NumberFormatter.humanizeExact`.                                                                                                                                                             |
+| colorScheme     | Optional. Color scheme to be used by the plots. Can be either a list of hex color codes or one of the [color scheme names](https://github.com/shutterstock/rickshaw/blob/master/src/js/Rickshaw.Fixtures.Color.js) supported by Rickshaw. Defaults to `'colorwheel'`. |
 
 If both `expr` and `name` are lists, they must be of the same length. The name
 will be applied to the plots for the corresponding expression.
 
 Valid options for the `yAxisFormatter` and `yHoverFormatter`:
 
-* `PromConsole.NumberFormatter.humanize`: Format using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
-* `PromConsole.NumberFormatter.humanizeNoSmallPrefix`: For absolute values
+- `PromConsole.NumberFormatter.humanize`: Format using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
+- `PromConsole.NumberFormatter.humanizeNoSmallPrefix`: For absolute values
   greater than 1, format using using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
   For absolute values less than 1, format with 3 significant digits. This is
   useful to avoid units such as milliqueries per second that can be produced by
   `PromConsole.NumberFormatter.humanize`.
-* `PromConsole.NumberFormatter.humanize1024`: Format the humanized result using a base of 1024 rather than 1000.
+- `PromConsole.NumberFormatter.humanize1024`: Format the humanized result using a base of 1024 rather than 1000.

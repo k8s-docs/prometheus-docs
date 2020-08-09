@@ -1,13 +1,12 @@
 ---
-title: Interview with Weaveworks
-created_at: 2017-02-20
+title: 与Weaveworks面试
+date: 2017-02-20
 kind: article
 author_name: Brian Brazil
 ---
 
-*Continuing our series of interviews with users of Prometheus, Tom Wilkie from
-Weaveworks talks about how they choose Prometheus and are now building on it.*
-
+_Continuing our series of interviews with users of Prometheus, Tom Wilkie from
+Weaveworks talks about how they choose Prometheus and are now building on it._
 
 ## Can you tell us about Weaveworks?
 
@@ -16,12 +15,12 @@ Cloud](https://www.weave.works/solution/cloud/), a service which
 "operationalizes" microservices through a combination of open source projects
 and software as a service.
 
-Weave Cloud consists of: 
+Weave Cloud consists of:
 
-  * Visualisation with [Weave Scope](https://github.com/weaveworks/scope)
-  * Continuous Deployment with [Weave Flux](https://github.com/weaveworks/flux) 
-  * Networking with [Weave Net](https://github.com/weaveworks/weave), the container SDN 
-  * [Monitoring with Weave Cortex](https://www.weave.works/guides/cloud-guide-part-3-monitor-prometheus-monitoring/), our open source, distributed Prometheus-as-a-Service.
+- Visualisation with [Weave Scope](https://github.com/weaveworks/scope)
+- Continuous Deployment with [Weave Flux](https://github.com/weaveworks/flux)
+- Networking with [Weave Net](https://github.com/weaveworks/weave), the container SDN
+- [Monitoring with Weave Cortex](https://www.weave.works/guides/cloud-guide-part-3-monitor-prometheus-monitoring/), our open source, distributed Prometheus-as-a-Service.
 
 You can try Weave Cloud [free for 60 days](https://cloud.weave.works/signup).
 For the latest on our products check out our [blog](https://www.weave.works/blog/), [Twitter](https://twitter.com/weaveworks), or [Slack](https://weave-community.slack.com/) ([invite](https://weaveworks.github.io/community-slack/)).
@@ -50,7 +49,7 @@ When we started with Prometheus the Kubernetes service discovery was still just
 a PR and as such there were few docs. We ran a custom build for a while and
 kinda just muddled along, working it out for ourselves. Eventually we gave a
 talk at the [London Prometheus meetup](https://www.meetup.com/Prometheus-London/) on [our experience](http://www.slideshare.net/weaveworks/kubernetes-and-prometheus) and published a
-[series](https://www.weave.works/prometheus-kubernetes-deploying/) of [blog](https://www.weave.works/prometheus-and-kubernetes-monitoring-your-applications/) [posts](https://www.weave.works/monitoring-kubernetes-infrastructure/). 
+[series](https://www.weave.works/prometheus-kubernetes-deploying/) of [blog](https://www.weave.works/prometheus-and-kubernetes-monitoring-your-applications/) [posts](https://www.weave.works/monitoring-kubernetes-infrastructure/).
 
 We've tried pretty much every different option for running Prometheus. We
 started off building our own container images with embedded config, running
@@ -76,7 +75,7 @@ Cortex was born.
 
 Ignoring Cortex for a second, we were particularly excited to see the
 introduction of the HA Alert Manager; although mainly because it was one of the
-[first non-Weaveworks projects to use Weave Mesh](https://www.weave.works/weave-mesh-prometheus-alertmanager/), 
+[first non-Weaveworks projects to use Weave Mesh](https://www.weave.works/weave-mesh-prometheus-alertmanager/),
 our gossip and coordination layer.
 
 I was also particularly keen on the version two Kubernetes service discovery

@@ -1,6 +1,6 @@
 ---
-title: PromCon 2016 - It's a wrap!
-created_at: 2016-09-04
+title: PromCon 2016  - 这是一个包！
+date: 2016-09-04
 kind: article
 author_name: Julius Volz
 ---
@@ -28,7 +28,7 @@ how they were using Prometheus or are building solutions around it. For example,
 [DigitalOcean](https://www.digitalocean.com/) spoke about their challenges of
 using Prometheus at massive scale, while
 [ShuttleCloud](https://www.shuttlecloud.com/) explained how it was a great fit
-for monitoring their small startup.  Our furthest-traveled speaker came all the
+for monitoring their small startup. Our furthest-traveled speaker came all the
 way from Tokyo to present how [LINE](https://linecorp.com/en/) is monitoring
 their systems using Prometheus. [Weaveworks](https://www.weave.works/)
 explained how they built a scalable multi-tenant version of Prometheus.

@@ -1,13 +1,12 @@
 ---
-title: Interview with Compose
-created_at: 2016-09-21
+title: 采访撰写
+date: 2016-09-21
 kind: article
 author_name: Brian Brazil
 ---
 
-*Continuing our series of interviews with users of Prometheus, Compose talks
-about their monitoring journey from Graphite and InfluxDB to Prometheus.*
-
+_Continuing our series of interviews with users of Prometheus, Compose talks
+about their monitoring journey from Graphite and InfluxDB to Prometheus._
 
 ## Can you tell us about yourself and what Compose does?
 
@@ -24,7 +23,6 @@ where supported and is home to around 1000 highly-available database
 deployments in their own private networks. More regions and providers are in
 the works.
 
-
 ## What was your pre-Prometheus monitoring experience?
 
 Before Prometheus, a number of different metrics systems were tried. The first
@@ -35,13 +33,12 @@ overloaded our systems. While we were aware that Graphite could be scaled
 horizontally relatively easily, it would have been an expensive cluster.
 [InfluxDB](https://www.influxdata.com/) looked more promising so we started
 trying out the early-ish versions of that and it seemed to work well for a good
-while. Goodbye Graphite. 
+while. Goodbye Graphite.
 
 The earlier versions of InfluxDB had some issues with data corruption
 occasionally. We semi-regularly had to purge all of our metrics. It wasn’t a
 devastating loss for us normally, but it was irritating. The continued promises
 of features that never materialised frankly wore on us.
-
 
 ## Why did you decide to look at Prometheus?
 
@@ -54,7 +51,6 @@ well in our environment where we often have several hundred containers with
 their own metrics on each host, but by combining it with Telegraf, we can
 arrange to have each host export metrics for all its containers (as well as its
 overall resource metrics) via a single Prometheus scrape target.
-
 
 ## How did you transition?
 
@@ -94,7 +90,6 @@ identical node scraping all the same targets, then added a simple failover
 scheme with keepalived + DNS updates. This was now more highly available than
 our previous system so we switched our customer-facing graphs to use Prometheus
 and tore down the old system.
-
 
 ![Prometheus-powered memory metrics for PostgresSQL containers in our app](/assets/blog/2016-09-21/compose-memory-stats.png)
 
@@ -136,4 +131,3 @@ hosts/containers from different clusters in the same dashboard, but we may keep
 a small global cluster with much longer retention and just a modest number of
 down-sampled and aggregated metrics from each cluster’s Prometheus using
 Recording Rules.
-

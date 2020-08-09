@@ -1,9 +1,7 @@
 ---
-title: Consoles and dashboards
-sort_rank: 3
+title: 控制台和仪表板
+weight: 3
 ---
-
-# Consoles and dashboards
 
 It can be tempting to display as much data as possible on a dashboard, especially
 when a system like Prometheus offers the ability to have such rich
@@ -23,9 +21,9 @@ service.
 
 We have found the following guidelines very effective:
 
-* Have no more than 5 graphs on a console.
-* Have no more than 5 plots (lines) on each graph. You can get away with more if it is a stacked/area graph.
-* When using the provided console template examples, avoid more than 20-30 entries in the right-hand-side table.
+- Have no more than 5 graphs on a console.
+- Have no more than 5 plots (lines) on each graph. You can get away with more if it is a stacked/area graph.
+- When using the provided console template examples, avoid more than 20-30 entries in the right-hand-side table.
 
 If you find yourself exceeding these, it could make sense to demote the visibility of
 less important information, possibly splitting out some subsystems to a new console.

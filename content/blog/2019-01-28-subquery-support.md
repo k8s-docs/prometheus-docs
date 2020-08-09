@@ -1,6 +1,6 @@
 ---
-title: Subquery Support
-created_at: 2019-01-28
+title: 子查询支持
+date: 2019-01-28
 kind: article
 author_name: Ganesh Vernekar
 ---
@@ -15,7 +15,7 @@ The [pull request](https://github.com/prometheus/prometheus/pull/4831) for subqu
 
 Sometimes, there are cases when you want to spot a problem using `rate` with lower resolution/range (e.g. `5m`) while aggregating this data for higher range (e.g. `max_over_time` for `1h`).
 
-Previously, the above was not possible for a single *PromQL* query. If you wanted to have a range selection on a query for your alerting rules or graphing, it would require you to have a recording rule based on that query, and perform range selection on the metrics created by the recording rules. Example: `max_over_time(rate(my_counter_total[5m])[1h])`.
+Previously, the above was not possible for a single _PromQL_ query. If you wanted to have a range selection on a query for your alerting rules or graphing, it would require you to have a recording rule based on that query, and perform range selection on the metrics created by the recording rules. Example: `max_over_time(rate(my_counter_total[5m])[1h])`.
 
 When you want some quick results on data spanning days or weeks, it can be quite a bit of a wait until you have enough data in your recording rules before it can be used. Forgetting to add recording rules can be frustrating. And it would be tedious to create a recording rule for each step of a query.
 
@@ -29,9 +29,9 @@ The Prometheus team arrived at a consensus for the syntax of subqueries at the P
 
     <instant_query> '[' <range> ':' [ <resolution> ] ']' [ offset <duration> ]
 
-* `<instant_query>` is equivalent to `query` field in `/query_range` API.
-* `<range>` and `offset <duration>` is similar to a range selector.
-* `<resolution>` is optional, which is equivalent to `step` in `/query_range` API.
+- `<instant_query>` is equivalent to `query` field in `/query_range` API.
+- `<range>` and `offset <duration>` is similar to a range selector.
+- `<resolution>` is optional, which is equivalent to `step` in `/query_range` API.
 
 When the resolution is not specified, the global evaluation interval is taken as the default resolution for the subquery. Also, the step of the subquery is aligned independently, and does not depend on the parent query's evaluation time.
 
@@ -43,9 +43,9 @@ The subquery inside the `min_over_time` function returns the 5-minute rate of th
 
 Breakdown:
 
-* `rate(http_requests_total[5m])[30m:1m]` is the subquery, where `rate(http_requests_total[5m])` is the query to be executed.
-* `rate(http_requests_total[5m])` is executed from `start=<now>-30m` to `end=<now>`, at a resolution of `1m`. Note that `start` time is aligned independently with step of `1m` (aligned steps are `0m 1m 2m 3m ...`).
-* Finally the result of all the evaluations above are passed to `min_over_time()`.
+- `rate(http_requests_total[5m])[30m:1m]` is the subquery, where `rate(http_requests_total[5m])` is the query to be executed.
+- `rate(http_requests_total[5m])` is executed from `start=<now>-30m` to `end=<now>`, at a resolution of `1m`. Note that `start` time is aligned independently with step of `1m` (aligned steps are `0m 1m 2m 3m ...`).
+- Finally the result of all the evaluations above are passed to `min_over_time()`.
 
 Below is an example of a nested subquery, and usage of default resolution. The innermost subquery gets the rate of `distance_covered_meters_total` over a range of time. We use that to get `deriv()` of the rates, again for a range of time. And finally take the max of all the derivatives.
 Note that the `<now>` time for the innermost subquery is relative to the evaluation time of the outer subquery on `deriv()`.

@@ -1,9 +1,7 @@
 ---
-title: Recording rules
-sort_rank: 6
+title: 记录规则
+weight: 6
 ---
-
-# Recording rules
 
 A consistent naming scheme for [recording rules](/docs/prometheus/latest/configuration/recording_rules/)
 makes it easier to interpret the meaning of a rule at a glance. It also avoids
@@ -27,7 +25,7 @@ To keep the operations clean, `_sum` is omitted if there are other operations,
 as `sum()`. Associative operations can be merged (for example `min_min` is the
 same as `min`).
 
-If there is no obvious operation to use, use `sum`.  When taking a ratio by
+If there is no obvious operation to use, use `sum`. When taking a ratio by
 doing division, separate the metrics using `_per_` and call the operation
 `ratio`.
 
@@ -89,7 +87,6 @@ Calculating a request failure ratio and aggregating up to the job-level failure 
     /
       sum without (instance, path)(instance_path:requests:rate5m{job="myjob"})
 ```
-
 
 Calculating average latency over a time period from a Summary:
 

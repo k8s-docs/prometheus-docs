@@ -1,6 +1,6 @@
 ---
-title: Advanced Service Discovery in Prometheus 0.14.0
-created_at: 2015-06-01
+title: 高级服务发现在 Prometheus 0.14.0
+date: 2015-06-01
 kind: article
 author_name: Fabian Reinartz, Julius Volz
 ---
@@ -46,7 +46,6 @@ Note: Internally, even the address of a target is stored in a special
 `__address__` label. This can be useful during advanced label manipulation
 (relabeling), as we will see later. Labels starting with `__` do not appear in
 the final time series.
-
 
 ## Scrape configurations and relabeling
 
@@ -111,6 +110,7 @@ This rule transforms a target with the label set:
   "label_b": "bar"
 }
 ```
+
 ...into a target with the label set:
 
 ```
@@ -128,7 +128,6 @@ You can read more about relabeling and how you can use it to filter targets in t
 [configuration documentation](/docs/operating/configuration#relabel_config).
 
 Over the next sections, we will see how you can leverage relabeling when using service discovery.
-
 
 ## Discovery with DNS-SRV records
 
@@ -177,7 +176,6 @@ scrape_configs:
 This will attach the `zone` and `job` label to each target based on the SRV record
 it came from.
 
-
 ## Discovery with Consul
 
 Service discovery via Consul is now supported natively. It can be configured by defining
@@ -221,7 +219,6 @@ Each target's `instance` label is set to the node name provided by Consul.
 
 A full documentation of all configuration parameters for service discovery via Consul
 can be found on the [Prometheus website](/docs/operating/configuration#relabel_config).
-
 
 ## Custom service discovery
 
@@ -326,7 +323,6 @@ While Prometheus will not apply any malformed changes to files, it is considered
 update your files atomically via renaming, as we do in our example.
 It is also recommended to split larger amounts of target groups into several files based on
 logical grouping.
-
 
 ## Conclusion
 

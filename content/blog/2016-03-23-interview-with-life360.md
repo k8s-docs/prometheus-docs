@@ -1,13 +1,13 @@
 ---
-title: Interview with Life360
-created_at: 2016-03-23
+title: 采访Life360
+date: 2016-03-23
 kind: article
 author_name: Brian Brazil
 ---
 
-*This is the first in a series of interviews with users of Prometheus, allowing
+_This is the first in a series of interviews with users of Prometheus, allowing
 them to share their experiences of evaluating and using Prometheus. Our first
-interview is with Daniel from Life360.*
+interview is with Daniel from Life360._
 
 ## Can you tell us about yourself and what Life360 does?
 
@@ -40,10 +40,10 @@ is integrated with it.
 Our monitoring setup, before we switched to Prometheus, included many
 components such as:
 
-  * Copperegg (now Idera)
-  * Graphite + Statsd + Grafana
-  * Sensu
-  * AWS Cloudwatch
+- Copperegg (now Idera)
+- Graphite + Statsd + Grafana
+- Sensu
+- AWS Cloudwatch
 
 We primarily use MySQL, NSQ and HAProxy and we found that all of the monitoring
 solutions mentioned above were very partial, and required a lot of
@@ -79,14 +79,13 @@ Grafana graphs, up to the point where we had total service coverage.
 
 We were also currently looking at InfluxDB for long term storage, but due to
 [recent developments](https://influxdata.com/blog/update-on-influxdb-clustering-high-availability-and-monetization/),
-this may no longer be a viable option. 
+this may no longer be a viable option.
 
 We then added exporters for MySQL, Node, Cloudwatch, HAProxy, JMX, NSQ (with a
 bit of our own code), Redis and Blackbox (with our own contribution to add
 authentication headers).
 
 [![NSQ Overview Dashboard](/assets/blog/2016-03-23/nsq_overview.png)](/assets/blog/2016-03-23/nsq_overview.png)
-
 
 ## What improvements have you seen since switching?
 
@@ -97,7 +96,6 @@ Grafana as a monitoring tool was extremely valuable to us. Nowadays, we are
 focusing on taking all that data and use it to detect anomalies, which will
 eventually become alerts in the Alert Manager.
 
-
 ## What do you think the future holds for Life360 and Prometheus?
 
 We currently have one of our projects instrumented directly with a Prometheus
@@ -107,4 +105,4 @@ meaningful alerts and stats about our infrastructure.
 
 We look forward to growing with the project and keep contributing.
 
-*Thank you Daniel! The source for Life360's dashboards is shared on [Github](https://github.com/life360/prometheus-grafana-dashboards).*
+_Thank you Daniel! The source for Life360's dashboards is shared on [Github](https://github.com/life360/prometheus-grafana-dashboards)._

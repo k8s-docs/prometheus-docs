@@ -1,12 +1,12 @@
 ---
-title: Interview with ForgeRock
-created_at: 2019-06-18
+title: 采访ForgeRock
+date: 2019-06-18
 kind: article
 author_name: Simon Pasquier
 ---
 
-*Continuing our series of interviews with users of Prometheus, Ludovic Poitou
-from ForgeRock talks about their monitoring journey.*
+_Continuing our series of interviews with users of Prometheus, Ludovic Poitou
+from ForgeRock talks about their monitoring journey._
 
 ## Can you tell us about yourself and what ForgeRock does?
 

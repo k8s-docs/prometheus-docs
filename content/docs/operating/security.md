@@ -1,6 +1,6 @@
 ---
-title: Security
-sort_rank: 4
+title: 安全
+weight: 4
 ---
 
 # Security Model
@@ -42,7 +42,7 @@ relabelling may grant some of this control to anyone who can modify data in
 that service discovery system.
 
 Scraped targets may be run by untrusted users. It should not by default be
-possible for a target to expose data that impersonates a different target.  The
+possible for a target to expose data that impersonates a different target. The
 `honor_labels` option removes this protection, as can certain relabelling
 setups.
 
@@ -176,8 +176,7 @@ If you are composing PromQL queries that include input from untrusted users
 (e.g. URL parameters to console templates, or something you built yourself) who
 are not meant to be able to run arbitrary PromQL queries make sure any
 untrusted input is appropriately escaped to prevent injection attacks. For
-example `up{job="<user_input>"}` would become `up{job=""} or
-some_metric{zzz=""}` if the `<user_input>` was `"} or some_metric{zzz="`.
+example `up{job="<user_input>"}` would become `up{job=""} or some_metric{zzz=""}` if the `<user_input>` was `"} or some_metric{zzz="`.
 
 For those using Grafana note that [dashboard permissions are not data source
 permissions](http://docs.grafana.org/administration/permissions/#data-source-permissions),

@@ -1,14 +1,13 @@
 ---
-title: Instrumenting a Go application
+title: 插装一个Go应用程序
+linkTitle: Go应用
 ---
-
-# Instrumenting a Go application for Prometheus
 
 Prometheus has an official [Go client library](https://github.com/prometheus/client_golang) that you can use to instrument Go applications. In this guide, we'll create a simple Go application that exposes Prometheus metrics via HTTP.
 
 NOTE: For comprehensive API documentation, see the [GoDoc](https://godoc.org/github.com/prometheus/client_golang) for Prometheus' various Go libraries.
 
-## Installation
+## 安装
 
 You can install the `prometheus`, `promauto`, and `promhttp` libraries necessary for the guide using [`go get`](https://golang.org/doc/articles/go_command.html):
 
@@ -18,7 +17,7 @@ go get github.com/prometheus/client_golang/prometheus/promauto
 go get github.com/prometheus/client_golang/prometheus/promhttp
 ```
 
-## How Go exposition works
+## 怎么样 Go exposition 作品
 
 To expose Prometheus metrics in a Go application, you need to provide a `/metrics` HTTP endpoint. You can use the [`prometheus/promhttp`](https://godoc.org/github.com/prometheus/client_golang/prometheus/promhttp) library's HTTP [`Handler`](https://godoc.org/github.com/prometheus/client_golang/prometheus/promhttp#Handler) as the handler function.
 
@@ -51,7 +50,7 @@ To access the metrics:
 curl http://localhost:2112/metrics
 ```
 
-## Adding your own metrics
+## 添加您自己的指标
 
 The application [above](#how-go-exposition-works) exposes only the default Go metrics. You can also register your own custom application-specific metrics. This example application exposes a `myapp_processed_ops_total` [counter](/docs/concepts/metric_types/#counter) that counts the number of operations that have been processed thus far. Every 2 seconds, the counter is incremented by one.
 
@@ -115,17 +114,17 @@ You can [configure](/docs/prometheus/latest/configuration/configuration/#scrape_
 
 ```yaml
 scrape_configs:
-- job_name: myapp
-  scrape_interval: 10s
-  static_configs:
-  - targets:
-    - localhost:2112
+  - job_name: myapp
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - localhost:2112
 ```
 
-## Other Go client features
+## 其他 Go 客户端功能
 
 In this guide we covered just a small handful of features available in the Prometheus Go client libraries. You can also expose other metrics types, such as [gauges](https://godoc.org/github.com/prometheus/client_golang/prometheus#Gauge) and [histograms](https://godoc.org/github.com/prometheus/client_golang/prometheus#Histogram), [non-global registries](https://godoc.org/github.com/prometheus/client_golang/prometheus#Registry), functions for [pushing metrics](https://godoc.org/github.com/prometheus/client_golang/prometheus/push) to Prometheus [PushGateways](/docs/instrumenting/pushing/), bridging Prometheus and [Graphite](https://godoc.org/github.com/prometheus/client_golang/prometheus/graphite), and more.
 
-## Summary
+## 摘要
 
 In this guide, you created two sample Go applications that expose metrics to Prometheus---one that exposes only the default Go metrics and one that also exposes a custom Prometheus counter---and configured a Prometheus instance to scrape metrics from those applications.

@@ -1,6 +1,6 @@
 ---
-title: Pull doesn't scale - or does it?
-created_at: 2016-07-23
+title: 拉不结垢 - 或做它？
+date: 2016-07-23
 kind: article
 author_name: Julius Volz
 ---
@@ -76,11 +76,11 @@ push-based approach and not overwhelm event buffers.
 However, again, Prometheus is not an event-based monitoring system. You do not
 send raw events to Prometheus, nor can it store them. Prometheus is in the
 business of collecting aggregated time series data. That means that it's only
-interested in regularly collecting the current *state* of a given set of
+interested in regularly collecting the current _state_ of a given set of
 metrics, not the underlying events that led to the generation of those metrics.
 For example, an instrumented service would not send a message about each HTTP
 request to Prometheus as it is handled, but would simply count up those
-requests in memory.  This can happen hundreds of thousands of times per second
+requests in memory. This can happen hundreds of thousands of times per second
 without causing any monitoring traffic. Prometheus then simply asks the service
 instance every 15 or 30 seconds (or whatever you configure) about the current
 counter value and stores that value together with the scrape timestamp as a
@@ -97,8 +97,8 @@ this as an operational scalability problem.
 
 We would argue that you cannot escape this configuration effort for
 serious monitoring setups in any case: if your monitoring system doesn't know
-what the world *should* look like and which monitored service instances
-*should* be there, how would it be able to tell when an instance just never
+what the world _should_ look like and which monitored service instances
+_should_ be there, how would it be able to tell when an instance just never
 reports in, is down due to an outage, or really is no longer meant to exist?
 This is only acceptable if you never care about the health of individual
 instances at all, like when you only run ephemeral workers where it is
@@ -106,7 +106,7 @@ sufficient for a large-enough number of them to report in some result. Most
 environments are not exclusively like that.
 
 If the monitoring system needs to know the desired state of the world anyway,
-then a push-based approach actually requires *more* configuration in total. Not
+then a push-based approach actually requires _more_ configuration in total. Not
 only does your monitoring system need to know what service instances should
 exist, but your service instances now also need to know how to reach your
 monitoring system. A pull approach not only requires less configuration,
@@ -138,7 +138,7 @@ more likely for a push-based approach to accidentally bring down your
 monitoring. If the control over what metrics get ingested from which instances
 is not centralized (in your monitoring system), then you run into the danger of
 experimental or rogue jobs suddenly pushing lots of garbage data into your
-production monitoring and bringing it down.  There are still plenty of ways how
+production monitoring and bringing it down. There are still plenty of ways how
 this can happen with a pull-based approach (which only controls where to pull
 metrics from, but not the size and nature of the metrics payloads), but the
 risk is lower. More importantly, such incidents can be mitigated at a central

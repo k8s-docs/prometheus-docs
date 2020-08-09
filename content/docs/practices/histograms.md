@@ -1,9 +1,7 @@
 ---
-title: Histograms and summaries
-sort_rank: 4
+title: 直方图和摘要
+weight: 4
 ---
-
-# Histograms and summaries
 
 Histograms and summaries are more complex metric types. Not only does
 a single histogram or summary create a multitude of time series, it is
@@ -24,8 +22,8 @@ only in a limited fashion (lacking [quantile calculation](#quantiles)).
 
 Histograms and summaries both sample observations, typically request
 durations or response sizes. They track the number of observations
-*and* the sum of the observed values, allowing you to calculate the
-*average* of the observed values. Note that the number of observations
+_and_ the sum of the observed values, allowing you to calculate the
+_average_ of the observed values. Note that the number of observations
 (showing up in Prometheus as a time series with a `_count` suffix) is
 inherently a counter (as described above, it only goes up). The sum of
 observations (showing up as a time series with a `_sum` suffix)
@@ -62,7 +60,6 @@ a histogram called `http_request_duration_seconds`.
     /
       sum(rate(http_request_duration_seconds_count[5m])) by (job)
 
-
 You can approximate the well-known [Apdex
 score](http://en.wikipedia.org/wiki/Apdex) in a similar way. Configure
 a bucket with the target request duration as the upper bound and
@@ -91,7 +88,7 @@ includes errors in the satisfied and tolerable parts of the calculation.
 
 You can use both summaries and histograms to calculate so-called φ-quantiles,
 where 0 ≤ φ ≤ 1. The φ-quantile is the observation value that ranks at number
-φ*N among the N observations. Examples for φ-quantiles: The 0.5-quantile is
+φ\*N among the N observations. Examples for φ-quantiles: The 0.5-quantile is
 known as the median. The 0.95-quantile is the 95th percentile.
 
 The essential difference between summaries and histograms is that summaries
@@ -103,15 +100,15 @@ function](/docs/prometheus/latest/querying/functions/#histogram_quantile).
 
 The two approaches have a number of different implications:
 
-|   | Histogram | Summary
-|---|-----------|---------
-| Required configuration | Pick buckets suitable for the expected range of observed values. | Pick desired φ-quantiles and sliding window. Other φ-quantiles and sliding windows cannot be calculated later.
-| Client performance | Observations are very cheap as they only need to increment counters. | Observations are expensive due to the streaming quantile calculation.
-| Server performance | The server has to calculate quantiles. You can use [recording rules](/docs/prometheus/latest/configuration/recording_rules/#recording-rules) should the ad-hoc calculation take too long (e.g. in a large dashboard). | Low server-side cost.
-| Number of time series (in addition to the `_sum` and `_count` series) | One time series per configured bucket. | One time series per configured quantile.
-| Quantile error (see below for details) | Error is limited in the dimension of observed values by the width of the relevant bucket. | Error is limited in the dimension of φ by a configurable value.
-| Specification of φ-quantile and sliding time-window | Ad-hoc with [Prometheus expressions](/docs/prometheus/latest/querying/functions/#histogram_quantile). | Preconfigured by the client.
-| Aggregation | Ad-hoc with [Prometheus expressions](/docs/prometheus/latest/querying/functions/#histogram_quantile). | In general [not aggregatable](http://latencytipoftheday.blogspot.de/2014/06/latencytipoftheday-you-cant-average.html).
+|                                                                       | Histogram                                                                                                                                                                                                             | Summary                                                                                                                |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Required configuration                                                | Pick buckets suitable for the expected range of observed values.                                                                                                                                                      | Pick desired φ-quantiles and sliding window. Other φ-quantiles and sliding windows cannot be calculated later.         |
+| Client performance                                                    | Observations are very cheap as they only need to increment counters.                                                                                                                                                  | Observations are expensive due to the streaming quantile calculation.                                                  |
+| Server performance                                                    | The server has to calculate quantiles. You can use [recording rules](/docs/prometheus/latest/configuration/recording_rules/#recording-rules) should the ad-hoc calculation take too long (e.g. in a large dashboard). | Low server-side cost.                                                                                                  |
+| Number of time series (in addition to the `_sum` and `_count` series) | One time series per configured bucket.                                                                                                                                                                                | One time series per configured quantile.                                                                               |
+| Quantile error (see below for details)                                | Error is limited in the dimension of observed values by the width of the relevant bucket.                                                                                                                             | Error is limited in the dimension of φ by a configurable value.                                                        |
+| Specification of φ-quantile and sliding time-window                   | Ad-hoc with [Prometheus expressions](/docs/prometheus/latest/querying/functions/#histogram_quantile).                                                                                                                 | Preconfigured by the client.                                                                                           |
+| Aggregation                                                           | Ad-hoc with [Prometheus expressions](/docs/prometheus/latest/querying/functions/#histogram_quantile).                                                                                                                 | In general [not aggregatable](http://latencytipoftheday.blogspot.de/2014/06/latencytipoftheday-you-cant-average.html). |
 
 Note the importance of the last item in the table. Let us return to
 the SLO of serving 95% of requests within 300ms. This time, you do not
@@ -215,13 +212,12 @@ small interval of observed values covers a large interval of φ.
 
 Two rules of thumb:
 
-  1. If you need to aggregate, choose histograms.
+1. If you need to aggregate, choose histograms.
 
-  2. Otherwise, choose a histogram if you have an idea of the range
-     and distribution of values that will be observed. Choose a
-     summary if you need an accurate quantile, no matter what the
-     range and distribution of the values is.
-
+2. Otherwise, choose a histogram if you have an idea of the range
+   and distribution of values that will be observed. Choose a
+   summary if you need an accurate quantile, no matter what the
+   range and distribution of the values is.
 
 ## What can I do if my client library does not support the metric type I need?
 

@@ -1,6 +1,6 @@
 ---
-title: Prometheus to Join the Cloud Native Computing Foundation
-created_at: 2016-05-09
+title: Prometheus 加入云本地计算基础
+date: 2016-05-09
 kind: article
 author_name: Julius Volz on behalf of the Prometheus core developers
 ---

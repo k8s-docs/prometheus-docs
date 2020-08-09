@@ -1,11 +1,11 @@
 ---
-title: Practical Anomaly Detection
-created_at: 2015-06-18
+title: 实用的异常检测
+date: 2015-06-18
 kind: article
 author_name: Brian Brazil
 ---
 
-In his *[Open Letter To Monitoring/Metrics/Alerting Companies](http://www.kitchensoap.com/2015/05/01/openlettertomonitoringproducts/)*,
+In his _[Open Letter To Monitoring/Metrics/Alerting Companies](http://www.kitchensoap.com/2015/05/01/openlettertomonitoringproducts/)_,
 John Allspaw asserts that attempting "to detect anomalies perfectly, at the right time, is not possible".
 
 I have seen several attempts by talented engineers to build systems to
@@ -68,28 +68,28 @@ be going to each instance. You create an alert definition for all of this:
 
 ```yaml
 groups:
-- name: Practical Anomaly Detection
-  rules:
-  - alert: InstanceLatencyOutlier
-    expr: >
-      (
-            (
-                instance:latency_seconds:mean5m
-              > on (job) group_left()
+  - name: Practical Anomaly Detection
+    rules:
+      - alert: InstanceLatencyOutlier
+        expr: >
+          (
                 (
-                    avg by (job)(instance:latency_seconds:mean5m)
-                  + on (job)
-                    2 * stddev by (job)(instance:latency_seconds:mean5m)
+                    instance:latency_seconds:mean5m
+                  > on (job) group_left()
+                    (
+                        avg by (job)(instance:latency_seconds:mean5m)
+                      + on (job)
+                        2 * stddev by (job)(instance:latency_seconds:mean5m)
+                    )
                 )
-            )
-          > on (job) group_left()
-            1.2 * avg by (job)(instance:latency_seconds:mean5m)
-        and on (job)
-            avg by (job)(instance:latency_seconds_count:rate5m)
-          >
-            1
-      )
-    for: 30m
+              > on (job) group_left()
+                1.2 * avg by (job)(instance:latency_seconds:mean5m)
+            and on (job)
+                avg by (job)(instance:latency_seconds_count:rate5m)
+              >
+                1
+          )
+        for: 30m
 ```
 
 ## Automatic actions

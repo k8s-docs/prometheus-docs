@@ -1,12 +1,12 @@
 ---
-title: Interview with ShowMax
-created_at: 2016-05-01
+title: 采访ShowMax
+date: 2016-05-01
 kind: article
 author_name: Brian Brazil
 ---
 
-*This is the second in a series of interviews with users of Prometheus, allowing
-them to share their experiences of evaluating and using Prometheus.*
+_This is the second in a series of interviews with users of Prometheus, allowing
+them to share their experiences of evaluating and using Prometheus._
 
 ## Can you tell us about yourself and what ShowMax does?
 
@@ -44,10 +44,10 @@ tooling for configuring Varnishes for routing requests.
 
 The primary use-cases for monitoring systems are:
 
-* Active monitoring and probing (via Icinga)
-* Metrics acquisition and creation of alerts based on these metrics (now Prometheus)
-* Log acquisition from backend services
-* Event and log acquisition from apps
+- Active monitoring and probing (via Icinga)
+- Metrics acquisition and creation of alerts based on these metrics (now Prometheus)
+- Log acquisition from backend services
+- Event and log acquisition from apps
 
 The last two use-cases are handled via our logging infrastructure. It consists
 of a collector running in the service container, which is listening on local
@@ -64,7 +64,6 @@ OpenTSDB. We have struggled considerably with both pipelines. We had to deal
 with either the I/O hungriness of Graphite, or the complexity and inadequate
 tooling around OpenTSDB.
 
-
 ## Why did you decide to look at Prometheus?
 
 After learning from our problems with the previous monitoring system, we looked
@@ -77,7 +76,6 @@ The proof of concept went great. We got a working system very quickly. We also
 evaluated InfluxDB as a main system as well as a long-term storage for
 Prometheus. But due to recent developments, this may no longer be a viable
 option for us.
-
 
 ## How did you transition?
 
@@ -119,7 +117,6 @@ repeatability, and auditing.
 
 We are pleased to announce that this tool is also now available under an Apache
 2.0 license on [GitHub](https://github.com/ShowMax/grafana-dashboards-generator).
-
 
 ## What improvements have you seen since switching?
 

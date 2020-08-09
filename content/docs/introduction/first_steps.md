@@ -1,23 +1,27 @@
 ---
-title: First steps
-sort_rank: 3
+title: 使用 Prometheus 第一步
+linkTitle: 第一步
+weight: 3
 ---
 
-# First steps with Prometheus
+欢迎来到 Prometheus!
+Prometheus 是一个监控平台 收集度量 从监控目标 通过刮度量 HTTP 端点 这些目标.
+本指南将告诉您如何安装, 配置和监控我们的第一 Prometheus 资源.
+您可以下载，安装和运行 Prometheus.
+您还可以下载和安装 exporter, 工具 暴露的主机和服务的时间序列数据.
+我们的第一个 exporter 将会 Prometheus 本身, 这提供了多种关于存储器使用，垃圾回收，和多个主机级度量。
 
-Welcome to Prometheus! Prometheus is a monitoring platform that collects metrics from monitored targets by scraping metrics HTTP endpoints on these targets. This guide will show you how to install, configure and monitor our first resource with Prometheus. You'll download, install and run Prometheus. You'll also download and install an exporter, tools that expose time series data on hosts and services. Our first exporter will be Prometheus itself, which provides a wide variety of host-level metrics about memory usage, garbage collection, and more.
+## 下载 Prometheus
 
-## Downloading Prometheus
-
-[Download the latest release](/download) of Prometheus for your platform, then
-extract it:
+针对您的平台[下载 Prometheus 最新版本](/download), 然后解压:
 
 ```language-bash
 tar xvfz prometheus-*.tar.gz
 cd prometheus-*
 ```
 
-The Prometheus server is a single binary called `prometheus` (or `prometheus.exe` on Microsoft Windows). We can run the binary and see help on its options by passing the `--help` flag.
+Prometheus 服务器称为`prometheus`一个二进制 (要么 `prometheus.exe` 上 Microsoft Windows).
+我们可以运行的二进制程序，通过使`--help`标志看到它的选项的帮助 .
 
 ```language-bash
 ./prometheus --help
@@ -28,13 +32,14 @@ The Prometheus monitoring server
 . . .
 ```
 
-Before starting Prometheus, let's configure it.
+在开始 Prometheus 之前, 让我们来配置它.
 
-## Configuring Prometheus
+## 配置 Prometheus
 
-Prometheus configuration is [YAML](http://www.yaml.org/start.html). The Prometheus download comes with a sample configuration in a file called `prometheus.yml` that is a good place to get started.
+Prometheus 配置是 [YAML](http://www.yaml.org/start.html).
+Prometheus 下载带有一个在`prometheus.yml`文件里示例配置 这是一个很好的地方开始.
 
-We've stripped out most of the comments in the example file to make it more succinct (comments are the lines prefixed with a `#`).
+我们已经去掉了大部分的示例文件的注释，使之更加简洁 (注释以`＃`前缀的行).
 
 ```language-yaml
 global:
@@ -51,80 +56,92 @@ scrape_configs:
       - targets: ['localhost:9090']
 ```
 
-There are three blocks of configuration in the example configuration file: `global`, `rule_files`, and `scrape_configs`.
+在示例配置文件中有配置的三个区块 : `global`, `rule_files`, 和 `scrape_configs`.
 
-The `global` block controls the Prometheus server's global configuration. We have two options present. The first, `scrape_interval`, controls how often Prometheus will scrape targets. You can override this for individual targets. In this case the global setting is to scrape every 15 seconds. The `evaluation_interval` option controls how often Prometheus will evaluate rules. Prometheus uses rules to create new time series and to generate alerts.
+`global`块控制 Prometheus 服务器的全局配置.
+我们目前有两个选择.
+首先, `scrape_interval`, 控制 Prometheus 多久会刮目标.
+您可以覆盖这个单个目标.
+在这种情况下，全局设置是每 15 秒刮.
+`evaluation_interval` 选项控制 Prometheus 多久会评估规则.
+Prometheus 使用规则来创建新的时间序列，并生成警报.
 
-The `rule_files` block specifies the location of any rules we want the Prometheus server to load. For now we've got no rules.
+`rule_files`块指定我们希望 Prometheus 服务器负载的任何规则的位置.
+现在，我们已经有了无规则.
 
-The last block, `scrape_configs`, controls what resources Prometheus monitors. Since Prometheus also exposes data about itself as an HTTP endpoint it can scrape and monitor its own health. In the default configuration there is a single job, called `prometheus`, which scrapes the time series data exposed by the Prometheus server. The job contains a single, statically configured, target, the `localhost` on port `9090`. Prometheus expects metrics to be available on targets on a path of `/metrics`. So this default job is scraping via the URL: http://localhost:9090/metrics.
+最后一个块，`scrape_configs`，控制哪些资源 Prometheus 显示器。
+由于 Prometheus 还公开有关数据本身 因为 HTTP 端点可以刮去并监视其自己的健康.
+在默认配置中有一个单一的作业, 叫 `prometheus`,其中刮除由 Prometheus 服务器暴露的时间序列数据.
+该作业包含一个单一的，静态配置，目标端口`localhost` `9090`.
+Prometheus 预计指标可用的目标 在目录 `/metrics`.
+所以这个默认的工作是通过 URL 刮: http://localhost:9090/metrics.
 
-The time series data returned will detail the state and performance of the Prometheus server.
+时间序列数据返回将详细介绍 Prometheus 服务器的状态和性能.
 
-For a complete specification of configuration options, see the
-[configuration documentation](/docs/operating/configuration).
+有关配置选项的完整规范, 参见[配置文档](/docs/operating/configuration).
 
-## Starting Prometheus
+## 开始 Prometheus
 
-To start Prometheus with our newly created configuration file, change to the directory containing the Prometheus binary and run:
+与我们的新创建的配置文件启动 Prometheus, 转到包含 Prometheus 二进制和运行目录:
 
 ```language-bash
 ./prometheus --config.file=prometheus.yml
 ```
 
-Prometheus should start up. You should also be able to browse to a status page about itself at http://localhost:9090. Give it about 30 seconds to collect data about itself from its own HTTP metrics endpoint.
+Prometheus 应该启动.
+你也应该能够浏览到状态页面本身有关 在 http://localhost:9090.
+给它 30 秒左右从自己的 HTTP 指标端点收集有关数据本身.
 
-You can also verify that Prometheus is serving metrics about itself by
-navigating to its own metrics endpoint: http://localhost:9090/metrics.
+您也可以验证 Prometheus 被导航到它自己的指标端点服务有关自身的度量: http://localhost:9090/metrics.
 
-## Using the expression browser
+## 使用浏览器的表达
 
-Let us try looking at some data that Prometheus has collected about itself. To
-use Prometheus's built-in expression browser, navigate to
-http://localhost:9090/graph and choose the "Console" view within the "Graph"
-tab.
+让我们试着寻找一些数据 Prometheus 已收集有关其自身.
+要使用 Prometheus 的内置浏览器表达, 导航 http://localhost:9090/graph 并选择“Graph”选项卡中的“Console”视图.
 
-As you can gather from http://localhost:9090/metrics, one metric that
-Prometheus exports about itself is called
-`promhttp_metric_handler_requests_total` (the total number of `/metrics` requests the Prometheus server has served). Go ahead and enter this into the expression console:
+你可以从 http://localhost:9090/metrics 收集 , 一个度量 Prometheus 出口量约本身被称为 `promhttp_metric_handler_requests_total` (`/ metrics`的总数 请求 Prometheus 服务器一直担任).
+来吧，进入控制台表达这:
 
 ```
 promhttp_metric_handler_requests_total
 ```
 
-This should return a number of different time series (along with the latest value recorded for each), all with the metric name `promhttp_metric_handler_requests_total`, but with different labels. These labels designate different requests statuses.
+这应返回许多不同的时间序列 (随着记录每个最新值), 所有的指标名称 `promhttp_metric_handler_requests_total`, 但不同的标签.
+这些标签指定不同的请求状态.
 
-If we were only interested in requests that resulted in HTTP code `200`, we could use this query to retrieve that information:
+如果我们只关心请求 这导致了 HTTP 代码`200`, 我们可以利用这个查询检索信息:
 
 ```
 promhttp_metric_handler_requests_total{code="200"}
 ```
 
-To count the number of returned time series, you could write:
+要计算返回时间序列的数量，你可以写:
 
 ```
 count(promhttp_metric_handler_requests_total)
 ```
 
-For more about the expression language, see the
-[expression language documentation](/docs/querying/basics/).
+欲了解更多有关表达式语言, 参见[表达式语言文档](/docs/querying/basics/).
 
-## Using the graphing interface
+## 使用绘图接口
 
-To graph expressions, navigate to http://localhost:9090/graph and use the "Graph" tab.
+为了图表情, 导航 http://localhost:9090/graph 并使用 "Graph" 标签.
 
-For example, enter the following expression to graph the per-second HTTP request rate returning status code 200 happening in the self-scraped Prometheus:
+例如, 输入以下表达式曲线图的每秒 HTTP 请求速率 返回状态码 200 发生在自刮 Prometheus:
 
 ```
 rate(promhttp_metric_handler_requests_total{code="200"}[1m])
 ```
 
-You can experiment with the graph range parameters and other settings.
+Y 你可以用图形范围的参数和其他设置实验.
 
-## Monitoring other targets
+## 监测的其他目标
 
-Collecting metrics from Prometheus alone isn't a great representation of Prometheus' capabilities. To get a better sense of what Prometheus can do, we recommend exploring documentation about other exporters. The [Monitoring Linux or macOS host metrics using a node exporter](/docs/guides/node-exporter) guide is a good place to start.
+从单独 Prometheus 收集度量不是 Prometheus 能力很大的代表性.
+为了得到一个什么样的 Prometheus 可以做的更好的感觉, 我们建议探索对其他出口文件.
+[使用节点出口监测 Linux 或 MACOS 主机度量](/docs/guides/node-exporter)指南是一个良好的开端.
 
-## Summary
+## 摘要
 
-In this guide, you installed Prometheus, configured a Prometheus instance to monitor resources, and learned some basics of working with time series data in Prometheus' expression browser. To continue learning about Prometheus, check out the [Overview](/docs/introduction/overview) for some ideas about what to explore next.
+在本指南中，您安装 Prometheus，配置了 Prometheus 实例来监控资源，并学会在 Prometheus 表达浏览器的时间序列数据工作的一些基础知识。
+要继续学习 Prometheus，检查出的[概述](/docs/introduction/overview) 对于下一步该怎么去探索一些想法.

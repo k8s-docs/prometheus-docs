@@ -1,6 +1,6 @@
 ---
-title: When (not) to use varbit chunks
-created_at: 2016-05-08
+title: 当（不）使用VARBIT块
+date: 2016-05-08
 kind: article
 author_name: Björn “Beorn” Rabenstein
 ---
@@ -129,7 +129,7 @@ aggregates over thousands of time series, the number of chunks to access
 multiplies accordingly, and the overhead of the sequential scan will become
 dominant. (Such queries are frowned upon, and we usually recommend to use a
 [recording rule](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/#recording-rules)
-for queries of that kind that are used frequently, e.g. in a dashboard.)  But
+for queries of that kind that are used frequently, e.g. in a dashboard.) But
 with the double-delta encoding, the query time might still have been
 acceptable, let's say around one second. After the switch to varbit encoding,
 the same query might last tens of seconds, which is clearly not what you want

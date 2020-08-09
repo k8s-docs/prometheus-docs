@@ -1,9 +1,7 @@
 ---
-title: Writing client libraries
-sort_rank: 2
+title: 编写客户端库
+weight: 2
 ---
-
-# Writing client libraries
 
 This document covers what functionality and API Prometheus client libraries
 should offer, with the aim of consistency across libraries, making the easy use
@@ -25,23 +23,23 @@ but it’s okay if it’s not present. In other words, a nice to have.
 
 Things to keep in mind:
 
-* Take advantage of each language’s features.
+- Take advantage of each language’s features.
 
-* The common use cases should be easy.
+- The common use cases should be easy.
 
-* The correct way to do something should be the easy way.
+- The correct way to do something should be the easy way.
 
-* More complex use cases should be possible.
+- More complex use cases should be possible.
 
 The common use cases are (in order):
 
-* Counters without labels spread liberally around libraries/applications.
+- Counters without labels spread liberally around libraries/applications.
 
-* Timing functions/blocks of code in Summaries/Histograms.
+- Timing functions/blocks of code in Summaries/Histograms.
 
-* Gauges to track current states of things (and their limits).
+- Gauges to track current states of things (and their limits).
 
-* Monitoring of batch jobs.
+- Monitoring of batch jobs.
 
 ## Overall structure
 
@@ -135,8 +133,8 @@ counter. It MUST NOT allow the value to decrease, however it MAY be reset to 0
 
 A counter MUST have the following methods:
 
-* `inc()`: Increment the counter by 1
-* `inc(double v)`: Increment the counter by the given amount. MUST check that v >= 0.
+- `inc()`: Increment the counter by 1
+- `inc(double v)`: Increment the counter by the given amount. MUST check that v >= 0.
 
 A counter is ENCOURAGED to have:
 
@@ -152,18 +150,18 @@ and down.
 
 A gauge MUST have the following methods:
 
-* `inc()`: Increment the gauge by 1
-* `inc(double v)`: Increment the gauge by the given amount
-* `dec()`: Decrement the gauge by 1
-* `dec(double v)`: Decrement the gauge by the given amount
-* `set(double v)`: Set the gauge to the given value
+- `inc()`: Increment the gauge by 1
+- `inc(double v)`: Increment the gauge by the given amount
+- `dec()`: Decrement the gauge by 1
+- `dec(double v)`: Decrement the gauge by the given amount
+- `set(double v)`: Set the gauge to the given value
 
 Gauges MUST start at 0, you MAY offer a way for a given gauge to start at a
 different number.
 
 A gauge SHOULD have the following methods:
 
-* `set_to_current_time()`: Set the gauge to the current unixtime in seconds.
+- `set_to_current_time()`: Set the gauge to the current unixtime in seconds.
 
 A gauge is ENCOURAGED to have:
 
@@ -189,7 +187,7 @@ quite useful and this MUST be the default.
 
 A summary MUST have the following methods:
 
-* `observe(double v)`: Observe the given amount
+- `observe(double v)`: Observe the given amount
 
 A summary SHOULD have the following methods:
 
@@ -210,15 +208,14 @@ A histogram MUST NOT allow `le` as a user-set label, as `le` is used internally
 to designate buckets.
 
 A histogram MUST offer a way to manually choose the buckets. Ways to set
-buckets in a `linear(start, width, count)` and `exponential(start, factor,
-count)` fashion SHOULD be offered. Count MUST exclude the `+Inf` bucket.
+buckets in a `linear(start, width, count)` and `exponential(start, factor, count)` fashion SHOULD be offered. Count MUST exclude the `+Inf` bucket.
 
 A histogram SHOULD have the same default buckets as other client libraries.
 Buckets MUST NOT be changeable once the metric is created.
 
 A histogram MUST have the following methods:
 
-* `observe(double v)`: Observe the given amount
+- `observe(double v)`: Observe the given amount
 
 A histogram SHOULD have the following methods:
 
@@ -227,7 +224,7 @@ decorator/context manager. In Java this is `startTimer`/`observeDuration`.
 Units other than seconds MUST NOT be offered (if a user wants something else,
 they can do it by hand). This should follow the same pattern as Gauge/Summary.
 
-Histogram  `_count`/`_sum` and the buckets MUST start at 0.
+Histogram `_count`/`_sum` and the buckets MUST start at 0.
 
 **Further metrics considerations**
 
@@ -336,7 +333,7 @@ bogus, inaccurate, or special values (like `NaN`). All memory values in bytes,
 all times in unixtime/seconds.
 
 | Metric name                        | Help string                                            | Unit             |
-| ---------------------------------- | ------------------------------------------------------ | ---------------  |
+| ---------------------------------- | ------------------------------------------------------ | ---------------- |
 | `process_cpu_seconds_total`        | Total user and system CPU time spent in seconds.       | seconds          |
 | `process_open_fds`                 | Number of open file descriptors.                       | file descriptors |
 | `process_max_fds`                  | Maximum number of open file descriptors.               | file descriptors |

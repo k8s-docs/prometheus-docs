@@ -1,6 +1,6 @@
 ---
-title: Custom Alertmanager Templates
-created_at: 2016-03-03
+title: 自定义模板Alertmanager
+date: 2016-03-03
 kind: article
 author_name: Fabian Reinartz
 ---
@@ -24,17 +24,17 @@ We use this simple Alertmanager configuration that sends all alerts to Slack:
 
 ```yaml
 global:
-  slack_api_url: '<slack_webhook_url>'
+  slack_api_url: "<slack_webhook_url>"
 
 route:
-  receiver: 'slack-notifications'
+  receiver: "slack-notifications"
   # All alerts in a notification have the same value for these labels.
   group_by: [alertname, datacenter, app]
 
 receivers:
-- name: 'slack-notifications'
-  slack_configs:
-  - channel: '#alerts'
+  - name: "slack-notifications"
+    slack_configs:
+      - channel: "#alerts"
 ```
 
 By default, a Slack message sent by Alertmanager looks like this:
@@ -67,18 +67,18 @@ by the Go programming language.
 
 ```yaml
 global:
-  slack_api_url: '<slack_webhook_url>'
+  slack_api_url: "<slack_webhook_url>"
 
 route:
-- receiver: 'slack-notifications'
-  group_by: [alertname, datacenter, app]
+  - receiver: "slack-notifications"
+    group_by: [alertname, datacenter, app]
 
 receivers:
-- name: 'slack-notifications'
-  slack_configs:
-  - channel: '#alerts'
-    # Template for the text field in Slack messages.
-    text: 'https://internal.myorg.net/wiki/alerts/{{ .GroupLabels.app }}/{{ .GroupLabels.alertname }}'
+  - name: "slack-notifications"
+    slack_configs:
+      - channel: "#alerts"
+        # Template for the text field in Slack messages.
+        text: "https://internal.myorg.net/wiki/alerts/{{ .GroupLabels.app }}/{{ .GroupLabels.alertname }}"
 ```
 
 We reload our Alertmanager by sending a `SIGHUP` or restart it to load the
@@ -106,20 +106,20 @@ field and we provide a path to our custom template file:
 
 ```yaml
 global:
-  slack_api_url: '<slack_webhook_url>'
+  slack_api_url: "<slack_webhook_url>"
 
 route:
-- receiver: 'slack-notifications'
-  group_by: [alertname, datacenter, app]
+  - receiver: "slack-notifications"
+    group_by: [alertname, datacenter, app]
 
 receivers:
-- name: 'slack-notifications'
-  slack_configs:
-  - channel: '#alerts'
-    text: '{{ template "slack.myorg.text" . }}'
+  - name: "slack-notifications"
+    slack_configs:
+      - channel: "#alerts"
+        text: '{{ template "slack.myorg.text" . }}'
 
 templates:
-- '/etc/alertmanager/templates/myorg.tmpl'
+  - "/etc/alertmanager/templates/myorg.tmpl"
 ```
 
 We reload our Alertmanager by sending a `SIGHUP` or restart it to load the

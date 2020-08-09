@@ -1,9 +1,7 @@
 ---
-title: Exposition formats
-sort_rank: 6
+title: 展览格式
+weight: 6
 ---
-
-# Exposition formats
 
 Metrics can be exposed to Prometheus using a simple [text-based](#text-based-format)
 exposition format. There are various [client libraries](/docs/instrumenting/clientlibs/)
@@ -26,17 +24,17 @@ format.
 
 ### Basic info
 
-| Aspect | Description |
-|--------|-------------|
-| **Inception** | April 2014  |
-| **Supported in** |  Prometheus version `>=0.4.0` |
-| **Transmission** | HTTP |
-| **Encoding** | UTF-8, `\n` line endings |
-| **HTTP `Content-Type`** | `text/plain; version=0.0.4` (A missing `version` value will lead to a fall-back to the most recent text format version.) |
-| **Optional HTTP `Content-Encoding`** | `gzip` |
-| **Advantages** | <ul><li>Human-readable</li><li>Easy to assemble, especially for minimalistic cases (no nesting required)</li><li>Readable line by line (with the exception of type hints and docstrings)</li></ul> |
-| **Limitations** | <ul><li>Verbose</li><li>Types and docstrings not integral part of the syntax, meaning little-to-nonexistent metric contract validation</li><li>Parsing cost</li></ul>|
-| **Supported metric primitives** | <ul><li>Counter</li><li>Gauge</li><li>Histogram</li><li>Summary</li><li>Untyped</li></ul> |
+| Aspect                               | Description                                                                                                                                                                                        |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Inception**                        | April 2014                                                                                                                                                                                         |
+| **Supported in**                     | Prometheus version `>=0.4.0`                                                                                                                                                                       |
+| **Transmission**                     | HTTP                                                                                                                                                                                               |
+| **Encoding**                         | UTF-8, `\n` line endings                                                                                                                                                                           |
+| **HTTP `Content-Type`**              | `text/plain; version=0.0.4` (A missing `version` value will lead to a fall-back to the most recent text format version.)                                                                           |
+| **Optional HTTP `Content-Encoding`** | `gzip`                                                                                                                                                                                             |
+| **Advantages**                       | <ul><li>Human-readable</li><li>Easy to assemble, especially for minimalistic cases (no nesting required)</li><li>Readable line by line (with the exception of type hints and docstrings)</li></ul> |
+| **Limitations**                      | <ul><li>Verbose</li><li>Types and docstrings not integral part of the syntax, meaning little-to-nonexistent metric contract validation</li><li>Parsing cost</li></ul>                              |
+| **Supported metric primitives**      | <ul><li>Counter</li><li>Gauge</li><li>Histogram</li><li>Summary</li><li>Untyped</li></ul>                                                                                                          |
 
 ### Text format details
 
@@ -80,10 +78,10 @@ metric_name [
 
 In the sample syntax:
 
-*  `metric_name` and `label_name` carry the usual Prometheus expression language restrictions.
-* `label_value` can be any sequence of UTF-8 characters, but the backslash (`\`), double-quote (`"`), and line feed (`\n`) characters have to be escaped as `\\`, `\"`, and `\n`, respectively.
-* `value` is a float represented as required by Go's [`ParseFloat()`](https://golang.org/pkg/strconv/#ParseFloat) function. In addition to standard numerical values, `Nan`, `+Inf`, and `-Inf` are valid values representing not a number, positive infinity, and negative infinity, respectively.
-* The `timestamp` is an `int64` (milliseconds since epoch, i.e. 1970-01-01 00:00:00 UTC, excluding leap seconds), represented as required by Go's [`ParseInt()`](https://golang.org/pkg/strconv/#ParseInt) function.
+- `metric_name` and `label_name` carry the usual Prometheus expression language restrictions.
+- `label_value` can be any sequence of UTF-8 characters, but the backslash (`\`), double-quote (`"`), and line feed (`\n`) characters have to be escaped as `\\`, `\"`, and `\n`, respectively.
+- `value` is a float represented as required by Go's [`ParseFloat()`](https://golang.org/pkg/strconv/#ParseFloat) function. In addition to standard numerical values, `Nan`, `+Inf`, and `-Inf` are valid values representing not a number, positive infinity, and negative infinity, respectively.
+- The `timestamp` is an `int64` (milliseconds since epoch, i.e. 1970-01-01 00:00:00 UTC, excluding leap seconds), represented as required by Go's [`ParseInt()`](https://golang.org/pkg/strconv/#ParseInt) function.
 
 #### Grouping and sorting
 
@@ -100,12 +98,12 @@ the ingestion behavior is undefined.
 The `histogram` and `summary` types are difficult to represent in the text
 format. The following conventions apply:
 
-* The sample sum for a summary or histogram named `x` is given as a separate sample named `x_sum`.
-* The sample count for a summary or histogram named `x` is given as a separate sample named `x_count`.
-* Each quantile of a summary named `x` is given as a separate sample line with the same name `x` and a label `{quantile="y"}`.
-* Each bucket count of a histogram named `x` is given as a separate sample line with the name `x_bucket` and a label `{le="y"}` (where `y` is the upper bound of the bucket).
-* A histogram _must_ have a bucket with `{le="+Inf"}`. Its value _must_ be identical to the value of `x_count`.
-* The buckets of a histogram and the quantiles of a summary must appear in increasing numerical order of their label values (for the `le` or the `quantile` label, respectively).
+- The sample sum for a summary or histogram named `x` is given as a separate sample named `x_sum`.
+- The sample count for a summary or histogram named `x` is given as a separate sample named `x_count`.
+- Each quantile of a summary named `x` is given as a separate sample line with the same name `x` and a label `{quantile="y"}`.
+- Each bucket count of a histogram named `x` is given as a separate sample line with the name `x_bucket` and a label `{le="y"}` (where `y` is the upper bound of the bucket).
+- A histogram _must_ have a bucket with `{le="+Inf"}`. Its value _must_ be identical to the value of `x_count`.
+- The buckets of a histogram and the quantiles of a summary must appear in increasing numerical order of their label values (for the `le` or the `quantile` label, respectively).
 
 ### Text format example
 

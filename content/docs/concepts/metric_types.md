@@ -1,6 +1,6 @@
 ---
-title: Metric types
-sort_rank: 2
+title: 指标类型
+weight: 2
 ---
 
 # Metric types
@@ -13,7 +13,7 @@ untyped time series. This may change in the future.
 
 ## Counter
 
-A _counter_ is a cumulative metric that represents a single [monotonically 
+A _counter_ is a cumulative metric that represents a single [monotonically
 increasing counter](https://en.wikipedia.org/wiki/Monotonic_function) whose
 value can only increase or be reset to zero on restart. For example, you can
 use a counter to represent the number of requests served, tasks completed, or
@@ -24,10 +24,10 @@ use a counter for the number of currently running processes; instead use a gauge
 
 Client library usage documentation for counters:
 
-   * [Go](http://godoc.org/github.com/prometheus/client_golang/prometheus#Counter)
-   * [Java](https://github.com/prometheus/client_java#counter)
-   * [Python](https://github.com/prometheus/client_python#counter)
-   * [Ruby](https://github.com/prometheus/client_ruby#counter)
+- [Go](http://godoc.org/github.com/prometheus/client_golang/prometheus#Counter)
+- [Java](https://github.com/prometheus/client_java#counter)
+- [Python](https://github.com/prometheus/client_python#counter)
+- [Ruby](https://github.com/prometheus/client_ruby#counter)
 
 ## Gauge
 
@@ -40,10 +40,10 @@ concurrent requests.
 
 Client library usage documentation for gauges:
 
-   * [Go](http://godoc.org/github.com/prometheus/client_golang/prometheus#Gauge)
-   * [Java](https://github.com/prometheus/client_java#gauge)
-   * [Python](https://github.com/prometheus/client_python#gauge)
-   * [Ruby](https://github.com/prometheus/client_ruby#gauge)
+- [Go](http://godoc.org/github.com/prometheus/client_golang/prometheus#Gauge)
+- [Java](https://github.com/prometheus/client_java#gauge)
+- [Python](https://github.com/prometheus/client_python#gauge)
+- [Ruby](https://github.com/prometheus/client_ruby#gauge)
 
 ## Histogram
 
@@ -54,9 +54,9 @@ of all observed values.
 A histogram with a base metric name of `<basename>` exposes multiple time series
 during a scrape:
 
-  * cumulative counters for the observation buckets, exposed as `<basename>_bucket{le="<upper inclusive bound>"}`
-  * the **total sum** of all observed values, exposed as `<basename>_sum`
-  * the **count** of events that have been observed, exposed as `<basename>_count` (identical to `<basename>_bucket{le="+Inf"}` above)
+- cumulative counters for the observation buckets, exposed as `<basename>_bucket{le="<upper inclusive bound>"}`
+- the **total sum** of all observed values, exposed as `<basename>_sum`
+- the **count** of events that have been observed, exposed as `<basename>_count` (identical to `<basename>_bucket{le="+Inf"}` above)
 
 Use the
 [`histogram_quantile()` function](/docs/prometheus/latest/querying/functions/#histogram_quantile)
@@ -70,10 +70,10 @@ usage and differences to [summaries](#summary).
 
 Client library usage documentation for histograms:
 
-   * [Go](http://godoc.org/github.com/prometheus/client_golang/prometheus#Histogram)
-   * [Java](https://github.com/prometheus/client_java#histogram)
-   * [Python](https://github.com/prometheus/client_python#histogram)
-   * [Ruby](https://github.com/prometheus/client_ruby#histogram)
+- [Go](http://godoc.org/github.com/prometheus/client_golang/prometheus#Histogram)
+- [Java](https://github.com/prometheus/client_java#histogram)
+- [Python](https://github.com/prometheus/client_python#histogram)
+- [Ruby](https://github.com/prometheus/client_ruby#histogram)
 
 ## Summary
 
@@ -85,9 +85,9 @@ quantiles over a sliding time window.
 A summary with a base metric name of `<basename>` exposes multiple time series
 during a scrape:
 
-  * streaming **φ-quantiles** (0 ≤ φ ≤ 1) of observed events, exposed as `<basename>{quantile="<φ>"}`
-  * the **total sum** of all observed values, exposed as `<basename>_sum`
-  * the **count** of events that have been observed, exposed as `<basename>_count`
+- streaming **φ-quantiles** (0 ≤ φ ≤ 1) of observed events, exposed as `<basename>{quantile="<φ>"}`
+- the **total sum** of all observed values, exposed as `<basename>_sum`
+- the **count** of events that have been observed, exposed as `<basename>_count`
 
 See [histograms and summaries](/docs/practices/histograms) for
 detailed explanations of φ-quantiles, summary usage, and differences
@@ -95,7 +95,7 @@ to [histograms](#histogram).
 
 Client library usage documentation for summaries:
 
-   * [Go](http://godoc.org/github.com/prometheus/client_golang/prometheus#Summary)
-   * [Java](https://github.com/prometheus/client_java#summary)
-   * [Python](https://github.com/prometheus/client_python#summary)
-   * [Ruby](https://github.com/prometheus/client_ruby#summary)
+- [Go](http://godoc.org/github.com/prometheus/client_golang/prometheus#Summary)
+- [Java](https://github.com/prometheus/client_java#summary)
+- [Python](https://github.com/prometheus/client_python#summary)
+- [Ruby](https://github.com/prometheus/client_ruby#summary)

@@ -1,13 +1,12 @@
 ---
-title: Interview with Europace
-created_at: 2017-04-06
+title: 采访Europace
+date: 2017-04-06
 kind: article
 author_name: Brian Brazil
 ---
 
-*Continuing our series of interviews with users of Prometheus, Tobias Gesellchen from
-Europace talks about how they discovered Prometheus.*
-
+_Continuing our series of interviews with users of Prometheus, Tobias Gesellchen from
+Europace talks about how they discovered Prometheus._
 
 ## Can you tell us about Europace does?
 
@@ -16,7 +15,7 @@ EUROPACE financial marketplace, which is Germany’s largest platform for
 mortgages, building finance products and personal loans. A fully integrated
 system links about 400 partners – banks, insurers and financial product
 distributors. Several thousand users execute some 35,000 transactions worth a
-total of up to €4 billion on EUROPACE every month.  Our engineers regularly
+total of up to €4 billion on EUROPACE every month. Our engineers regularly
 blog at [http://tech.europace.de/](http://tech.europace.de/) and
 [@EuropaceTech](https://twitter.com/europacetech).
 
@@ -36,11 +35,11 @@ community](https://www.meetup.com/Docker-Berlin/) we had been in contact with
 [SoundCloud](https://soundcloud.com/) and [Julius
 Volz](https://twitter.com/juliusvolz), who gave us a good overview. The
 combination of flexible Docker containers with the highly flexible label-based
-concept convinced us give Prometheus a try.  The Prometheus setup was easy
+concept convinced us give Prometheus a try. The Prometheus setup was easy
 enough, and the Alertmanager worked for our needs, so that we didn’t see any
 reason to try alternatives. Even our little pull requests to improve the
 integration in a Docker environment and with messaging tools had been merged
-very quickly.  Over time, we added several exporters and Grafana to the stack.
+very quickly. Over time, we added several exporters and Grafana to the stack.
 We never looked back or searched for alternatives.
 
 ![Grafana dashboard for Docker Registry](/assets/blog/2017-04-06/europace_grafana_1.png)
@@ -58,7 +57,7 @@ projects still use both Icinga and Prometheus in parallel.
 
 We had issues using Icinga due to scalability - several teams maintaining a
 centrally managed solution didn’t work well. Using the Prometheus stack along
-with the Alertmanager decoupled our teams and projects.  The Alertmanager is
+with the Alertmanager decoupled our teams and projects. The Alertmanager is
 now able to be deployed in a [high availability
 mode](https://github.com/prometheus/alertmanager#high-availability), which is a
 great improvement to the heart of our monitoring infrastructure.
@@ -70,4 +69,3 @@ We expect that more projects will introduce Prometheus along with the
 Alertmanager and slowly replace Icinga. With the inherent flexibility of
 Prometheus we expect that it will scale with our needs and that we won’t have
 issues adapting it to future requirements.
-

@@ -1,6 +1,6 @@
 ---
-title: Prometheus Graduates Within CNCF
-created_at: 2018-08-09
+title: Prometheus 毕业生在CNCF
+date: 2018-08-09
 kind: article
 author_name: Richard Hartmann
 ---
@@ -13,9 +13,9 @@ This also acts as an external verification of quality for anyone in internal dis
 
 Since reaching incubation level, a lot of things happened; some of which stand out:
 
-* We completely rewrote our storage back-end to support high churn in services
-* We had a large push towards stability, especially with 2.3.2
-* We started a documentation push with a special focus on making Prometheus adoption and joining the community easier
+- We completely rewrote our storage back-end to support high churn in services
+- We had a large push towards stability, especially with 2.3.2
+- We started a documentation push with a special focus on making Prometheus adoption and joining the community easier
 
 Especially the last point is important as we currently enter our fourth phase of adoption. These phases were adoption by
 

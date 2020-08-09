@@ -1,6 +1,6 @@
 ---
-title: Custom service discovery with etcd
-created_at: 2015-08-17
+title: 定制服务搜索与ETCD
+date: 2015-08-17
 kind: article
 author_name: Fabian Reinartz
 ---
@@ -318,4 +318,3 @@ for [Kubernetes](http://kubernetes.io/) and [Marathon](https://mesosphere.github
 Also check out [Keegan C Smith's](https://twitter.com/keegan_csmith) take on [EC2 service discovery](https://github.com/keegancsmith/prometheus-ec2-discovery) based on files.
 
 You can find the [full source of this blog post on GitHub](https://github.com/fabxc/prom_sd_example/tree/master/etcd_simple).
-

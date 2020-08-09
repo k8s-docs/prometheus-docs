@@ -1,12 +1,12 @@
 ---
-title: Interview with JustWatch
-created_at: 2016-10-12
+title: 采访JustWatch
+date: 2016-10-12
 kind: article
 author_name: Brian Brazil
 ---
 
-*Continuing our series of interviews with users of Prometheus, JustWatch talks
-about how they established their monitoring.*
+_Continuing our series of interviews with users of Prometheus, JustWatch talks
+about how they established their monitoring._
 
 ## Can you tell us about yourself and what JustWatch does?
 
@@ -46,7 +46,6 @@ some variance in your systems, the host and service based monitoring suites
 just don’t fit quite well. The label-based approach Prometheus took was
 something I always wanted to have, but didn’t find before.
 
-
 ## Why did you decide to look at Prometheus?
 
 At JustWatch the public Prometheus announcement hit exactly the right time. We
@@ -63,7 +62,6 @@ quickly set up a Prometheus server and started to instrument our Go services
 (we use almost only Go for the backend). It was amazing how easy that was - the
 design felt like being cloud- and service-oriented as a first principle and
 never got in the way.
-
 
 ## How did you transition?
 
@@ -82,7 +80,6 @@ miss something or when we are designing new services from scratch.
 
 It took some time to fully grasp the elegance of PromQL and labels concept
 fully, but the effort really paid off.
-
 
 ## What improvements have you seen since switching?
 
@@ -138,4 +135,3 @@ departments as well. We’d like to cover most of our KPIs with Prometheus to
 allow everyone to create beautiful dashboards, as well as alerts. We're
 currently even planning to abuse the awesome alert engine for a new, internal
 business project as well - stay tuned!
-

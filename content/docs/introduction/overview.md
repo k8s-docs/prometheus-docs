@@ -1,84 +1,65 @@
 ---
-title: Overview
-sort_rank: 1
+title: 概述
+weight: 1
 ---
 
-# Overview
+## 什么是 Prometheus?
 
-## What is Prometheus?
+[Prometheus](https://github.com/prometheus) 是一个开放源码的系统监控和报警工具包原建于[SoundCloud](http://soundcloud.com).
+公司自成立以来 2012, 很多公司和组织都采用`Prometheus`, 与该项目有一个非常活跃的开发者和用户[社区](/community).
+它现在是一个独立的开源项目和任何一家公司的保持独立 .
+为了强调这一点, 并澄清该项目的治理结构, Prometheus 在 2016 年加盟 [云本地计算基础](https://cncf.io/) 成为[Kubernetes](http://kubernetes.io/)后第二个托管项目.
 
-[Prometheus](https://github.com/prometheus) is an open-source systems
-monitoring and alerting toolkit originally built at
-[SoundCloud](http://soundcloud.com). Since its inception in 2012, many
-companies and organizations have adopted Prometheus, and the project has a very
-active developer and user [community](/community). It is now a standalone open source project
-and maintained independently of any company. To emphasize this, and to clarify
-the project's governance structure, Prometheus joined the
-[Cloud Native Computing Foundation](https://cncf.io/) in 2016
-as the second hosted project, after [Kubernetes](http://kubernetes.io/).
+对于 Prometheus 的更详尽的概述, 查看来自[媒体](/docs/introduction/media/)部分的链接资源.
 
-For more elaborate overviews of Prometheus, see the resources linked from the
-[media](/docs/introduction/media/) section.
+### 特征
 
-### Features
+Prometheus 的主要特点是:
 
-Prometheus's main features are:
+- 多维[数据模型](/docs/concepts/data_model/) 通过指标名称和键/值对确定时间序列数据
+- PromQL,[灵活的查询语言](/docs/prometheus/latest/querying/basics/)利用这一维度
+- 不依赖 分布式存储; 单个服务器节点是自治
+- 时间序列收集情况 通过通过 HTTP 拉模式
+- [推时间序列](/docs/instrumenting/pushing/) 支持 通过中间网关
+- 目标是通过服务发现或静态配置发现
+- 作图和仪表板支持的多种模式
 
-* a multi-dimensional [data model](/docs/concepts/data_model/) with time series data identified by metric name and key/value pairs
-* PromQL, a [flexible query language](/docs/prometheus/latest/querying/basics/)
-  to leverage this dimensionality
-* no reliance on distributed storage; single server nodes are autonomous
-* time series collection happens via a pull model over HTTP
-* [pushing time series](/docs/instrumenting/pushing/) is supported via an intermediary gateway
-* targets are discovered via service discovery or static configuration
-* multiple modes of graphing and dashboarding support
+### 组件
 
-### Components
+Prometheus 生态系统 由多个组件, 其中许多都是可选:
 
-The Prometheus ecosystem consists of multiple components, many of which are
-optional:
+- 主要的[Prometheus 服务器](https://github.com/prometheus/prometheus) 其中擦伤和存储时间序列数据
+- [客户端库](/docs/instrumenting/clientlibs/) 插装应用程序代码
+- [推送网关](https://github.com/prometheus/pushgateway) 支持短命工作
+- 特殊目的 [exporters](/docs/instrumenting/exporters/) 像服务 HAProxy, StatsD, Graphite, 等等
+- [alertmanager](https://github.com/prometheus/alertmanager) 处理警报
+- 各种支持工具
 
-* the main [Prometheus server](https://github.com/prometheus/prometheus) which scrapes and stores time series data
-* [client libraries](/docs/instrumenting/clientlibs/) for instrumenting application code
-* a [push gateway](https://github.com/prometheus/pushgateway) for supporting short-lived jobs
-* special-purpose [exporters](/docs/instrumenting/exporters/) for services like HAProxy, StatsD, Graphite, etc.
-* an [alertmanager](https://github.com/prometheus/alertmanager) to handle alerts
-* various support tools
+大多数 Prometheus 成分都写在[Go](https://golang.org/), 使它们易于构建和部署为静态二进制文件.
 
-Most Prometheus components are written in [Go](https://golang.org/), making
-them easy to build and deploy as static binaries.
+### 架构
 
-### Architecture
+此图说明 Prometheus 的架构和一些生态系统的组成部分:
 
-This diagram illustrates the architecture of Prometheus and some of
-its ecosystem components:
+![Prometheus 架构](/assets/architecture.png)
 
-![Prometheus architecture](/assets/architecture.png)
+从仪表工作 Prometheus 擦伤指标, 直接或通过对短命工作的中介推送网关.
+它在本地存储所有的样品刮掉 and 运行规则对这些数据要么汇总 and 从现有的数据记录新的时间序列或生成警报.
+[Grafana](https://grafana.com/) 或其他 API 消费者 可以被用于可视化所采集的数据.
 
-Prometheus scrapes metrics from instrumented jobs, either directly or via an
-intermediary push gateway for short-lived jobs. It stores all scraped samples
-locally and runs rules over this data to either aggregate and record new time
-series from existing data or generate alerts. [Grafana](https://grafana.com/) or
-other API consumers can be used to visualize the collected data.
+## 它什么时候合适？
 
-## When does it fit?
+Prometheus 非常适用于记录任何纯粹的数值时间序列.
+它适合 同时 机为中心的监控 以及 监测高度动态的面向服务的体系结构.
+在微服务的世界, 它的多维数据采集和查询的支持是一个特别的力量.
 
-Prometheus works well for recording any purely numeric time series. It fits
-both machine-centric monitoring as well as monitoring of highly dynamic
-service-oriented architectures. In a world of microservices, its support for
-multi-dimensional data collection and querying is a particular strength.
+Prometheus 被设计用于可靠性, 为系统 您在停电时去让您快速诊断问题.
+每 Prometheus 服务器是独立的, 不依赖于网络存储或其他远程服务.
+你可以依靠它，当你的基础设施的其他部分被破坏, 而你并不需要设置大量的基础设施使用它.
 
-Prometheus is designed for reliability, to be the system you go to
-during an outage to allow you to quickly diagnose problems. Each Prometheus
-server is standalone, not depending on network storage or other remote services.
-You can rely on it when other parts of your infrastructure are broken, and
-you do not need to setup extensive infrastructure to use it.
+## 它什么时候不适合？
 
-## When does it not fit?
-
-Prometheus values reliability. You can always view what statistics are
-available about your system, even under failure conditions. If you need 100%
-accuracy, such as for per-request billing, Prometheus is not a good choice as
-the collected data will likely not be detailed and complete enough. In such a
-case you would be best off using some other system to collect and analyze the
-data for billing, and Prometheus for the rest of your monitoring.
+Prometheus 值的可靠性.
+您可以随时查看 什么统计资料有关系统, 即使在故障情况.
+如果你需要 100％的准确度, 诸如用于每个请求的计费, Prometheus 不是一个好的选择因为收集到的数据可能不会被详细，完整的足够.
+在这种情况下 你最好是去使用一些其他系统 收集和分析计费数据 , 和 Prometheus 为您监视其余.

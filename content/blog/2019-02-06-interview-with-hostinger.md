@@ -1,12 +1,12 @@
 ---
-title: Interview with Hostinger
-created_at: 2019-02-06
+title: 采访Hostinger
+date: 2019-02-06
 kind: article
 author_name: Brian Brazil
 ---
 
-*Continuing our series of interviews with users of Prometheus, Donatas Abraitis
-from Hostinger talks about their monitoring journey.*
+_Continuing our series of interviews with users of Prometheus, Donatas Abraitis
+from Hostinger talks about their monitoring journey._
 
 ## Can you tell us about yourself and what Hostinger does?
 
@@ -32,7 +32,7 @@ we have around 2000 servers including VMs and physical boxes.
 For networking gear, SNMP is still widely used. With the rise of "white box"
 switches SNMP becomes less necessary, as regular tools can be installed.
 
-Instead of SNMP, you can run _node\_exporter_, or any other exporter inside the
+Instead of SNMP, you can run _node_exporter_, or any other exporter inside the
 switch to expose whatever metrics you need with the human-readable format.
 Beautiful is better than ugly, right?
 
@@ -56,18 +56,15 @@ During the transition period from the old monitoring stack (NCG -
 Nagios/Cacti/Ganglia) we used both systems and finally, we rely only on
 Prometheus.
 
-
 We have about 25 community metric exporters + some custom written like
-_lxc\_exporter_ in our fleet. Mostly we expose custom business-related metrics
+_lxc_exporter_ in our fleet. Mostly we expose custom business-related metrics
 using textfile collector.
-
 
 ## What improvements have you seen since switching?
 
-The new setup improved our time resolution from 5 minutes  to 15 seconds, which
+The new setup improved our time resolution from 5 minutes to 15 seconds, which
 allows us to have fine-grained and quite deep analysis. Even Mean Time To
 Detect(MTTD) was reduced by a factor of 4.
-
 
 ## What do you think the future holds for Hostinger and Prometheus?
 
@@ -84,11 +81,9 @@ monitoring data as well. Thus we decided by implementing highly available
 monitoring infrastructure: two Prometheus nodes, two Alertmanagers in separate
 continents.
 
-
 Our main visualization tool is Grafana. It's critically important that Grafana
 could query the backup Prometheus node if the primary is down. This is easy as
 that - put HAProxy in front and accept connections locally.
-
 
 Another problem: how can we prevent users (developers and other internal staff)
 from abusing dashboards overloading Prometheus nodes.
@@ -109,7 +104,7 @@ Prometheus nodes are independent while Alertmanager nodes form a cluster. If
 both Alertmanagers see the same alert they will deduplicate and fire once
 instead of multiple times.
 
-We have plans to run plenty of _blackbox\_exporters_ and monitor every Hostinger
+We have plans to run plenty of _blackbox_exporters_ and monitor every Hostinger
 client's website because anything that cannot be monitored cannot be assessed.
 
 We are looking forward to implementing more Prometheus nodes in the future so
