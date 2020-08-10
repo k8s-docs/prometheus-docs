@@ -9,7 +9,7 @@ queries against the local database, iterate over data, use conditionals,
 format data, etc. The Prometheus templating language is based on the [Go
 templating](https://golang.org/pkg/text/template/) system.
 
-## Data Structures
+## 数据结构
 
 The primary data structure for dealing with time series data is the sample, defined as:
 
@@ -26,7 +26,7 @@ The metric name of the sample is encoded in a special `__name__` label in the `L
 
 `interface{}` in Go is similar to a void pointer in C.
 
-## Functions
+## 功能
 
 In addition to the [default
 functions](https://golang.org/pkg/text/template/#hdr-Functions) provided by Go
@@ -35,7 +35,7 @@ results in templates.
 
 If functions are used in a pipeline, the pipeline value is passed as the last argument.
 
-### Queries
+### 查询
 
 | Name        | Arguments        | Returns  | Notes                                                           |
 | ----------- | ---------------- | -------- | --------------------------------------------------------------- |
@@ -47,7 +47,7 @@ If functions are used in a pipeline, the pipeline value is passed as the last ar
 
 `first`, `label` and `value` are intended to make query results easily usable in pipelines.
 
-### Numbers
+### 数字
 
 | Name               | Arguments | Returns | Notes                                                                                                              |
 | ------------------ | --------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -61,7 +61,7 @@ Humanizing functions are intended to produce reasonable output for consumption
 by humans, and are not guaranteed to return the same results between Prometheus
 versions.
 
-### Strings
+### 字符串
 
 | Name         | Arguments                  | Returns | Notes                                                                                                                                       |
 | ------------ | -------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -73,7 +73,7 @@ versions.
 | graphLink    | expr                       | string  | Returns path to graph view in the [expression browser](https://prometheus.io/docs/visualization/browser/) for the expression.               |
 | tableLink    | expr                       | string  | Returns path to tabular ("Console") view in the [expression browser](https://prometheus.io/docs/visualization/browser/) for the expression. |
 
-### Others
+### 其他
 
 | Name     | Arguments             | Returns                | Notes                                                                                                                                                                             |
 | -------- | --------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -81,19 +81,19 @@ versions.
 | tmpl     | string, []interface{} | nothing                | Like the built-in `template`, but allows non-literals as the template name. Note that the result is assumed to be safe, and will not be auto-escaped. Only available in consoles. |
 | safeHtml | string                | string                 | Marks string as HTML not requiring auto-escaping.                                                                                                                                 |
 
-## Template type differences
+## 模板类型差异
 
 Each of the types of templates provide different information that can be used to
 parameterize templates, and have a few other differences.
 
-### Alert field templates
+### 警报字段模板
 
 `.Value`, `.Labels`, and `.ExternalLabels` contain the alert value, the alert
 labels, and the globally configured external labels, respectively. They are
 also exposed as the `$value`, `$labels`, and `$externalLabels` variables for
 convenience.
 
-### Console templates
+### 控制台模板
 
 Consoles are exposed on `/consoles/`, and sourced from the directory pointed to
 by the `-web.console.templates` flag.

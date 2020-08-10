@@ -3,7 +3,7 @@ title: 记录规则
 weight: 2
 ---
 
-## Configuring rules
+## 配置规则
 
 Prometheus supports two types of rules which may be configured and then
 evaluated at regular intervals: recording rules and [alerting
@@ -15,7 +15,7 @@ Rule files use YAML.
 The rule files can be reloaded at runtime by sending `SIGHUP` to the Prometheus
 process. The changes are only applied if all rule files are well-formatted.
 
-## Syntax-checking rules
+## 语法检查规则
 
 To quickly check whether a rule file is syntactically correct without starting
 a Prometheus server, install and run Prometheus's `promtool` command-line
@@ -33,7 +33,7 @@ a `0` return status.
 If there are any syntax errors or invalid input arguments, it prints an error
 message to standard error and exits with a `1` return status.
 
-## Recording rules
+## 录音规则
 
 Recording rules allow you to precompute frequently needed or computationally
 expensive expressions and save their result as a new set of time series.

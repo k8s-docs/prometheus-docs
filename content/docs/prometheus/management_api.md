@@ -1,13 +1,11 @@
 ---
 title: 管理 API
 weight: 7
+description: >
+  Prometheus 提供了一组管理 API 以易于实现自动化和集成.
 ---
 
-# Management API
-
-Prometheus provides a set of management API to ease automation and integrations.
-
-### Health check
+## 健康检查
 
 ```
 GET /-/healthy
@@ -15,7 +13,7 @@ GET /-/healthy
 
 This endpoint always returns 200 and should be used to check Prometheus health.
 
-### Readiness check
+## 就绪检查
 
 ```
 GET /-/ready
@@ -23,7 +21,7 @@ GET /-/ready
 
 This endpoint returns 200 when Prometheus is ready to serve traffic (i.e. respond to queries).
 
-### Reload
+## 刷新
 
 ```
 PUT  /-/reload
@@ -34,7 +32,7 @@ This endpoint triggers a reload of the Prometheus configuration and rule files. 
 
 Alternatively, a configuration reload can be triggered by sending a `SIGHUP` to the Prometheus process.
 
-### Quit
+## 退出
 
 ```
 PUT  /-/quit

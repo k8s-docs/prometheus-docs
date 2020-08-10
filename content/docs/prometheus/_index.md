@@ -4,7 +4,7 @@ weight: 3
 nav_icon: server
 ---
 
-欢迎来到普罗米修斯服务器的文档.
+欢迎来到 Prometheus 服务器的文档.
 
 该文档可一起所有的项目文档 在 [prometheus.io](https://prometheus.io/docs/prometheus/latest/).
 

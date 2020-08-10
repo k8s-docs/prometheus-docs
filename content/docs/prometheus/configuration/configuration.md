@@ -18,7 +18,7 @@ A configuration reload is triggered by sending a `SIGHUP` to the Prometheus proc
 sending a HTTP POST request to the `/-/reload` endpoint (when the `--web.enable-lifecycle` flag is enabled).
 This will also reload any configured rule files.
 
-## Configuration file
+## 配置文件
 
 To specify which configuration file to load, use the `--config.file` flag.
 

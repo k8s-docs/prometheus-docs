@@ -9,7 +9,7 @@ queries against the local database, iterate over data, use conditionals,
 format data, etc. The Prometheus templating language is based on the [Go
 templating](https://golang.org/pkg/text/template/) system.
 
-## Simple alert field templates
+## 简单警报字段模板
 
 ```
 alert: InstanceDown
@@ -27,7 +27,7 @@ alert that fires, so keep any queries and templates lightweight. If you have a
 need for more complicated templates for alerts, it is recommended to link to a
 console instead.
 
-## Simple iteration
+## 简单的迭代
 
 This displays a list of instances, and whether they are up:
 
@@ -39,7 +39,7 @@ This displays a list of instances, and whether they are up:
 
 The special `.` variable contains the value of the current sample for each loop iteration.
 
-## Display one value
+## 显示一个值
 
 ```go
 {{ with query "some_metric{instance='someinstance'}" }}
@@ -54,7 +54,7 @@ happen if a scrape or rule evaluation has not run yet, or a host was down.
 The included `prom_query_drilldown` template handles this, allows for
 formatting of results, and linking to the [expression browser](https://prometheus.io/docs/visualization/browser/).
 
-## Using console URL parameters
+## 使用控制台 URL 参数
 
 ```go
 {{ with printf "node_memory_MemTotal{job='node',instance='%s'}" .Params.instance | query }}
@@ -64,7 +64,7 @@ formatting of results, and linking to the [expression browser](https://prometheu
 
 If accessed as `console.html?instance=hostname`, `.Params.instance` will evaluate to `hostname`.
 
-## Advanced iteration
+## 先进的迭代
 
 ```html
 <table>
@@ -101,7 +101,7 @@ Here we iterate over all network devices and display the network traffic for eac
 As the `range` action does not specify a variable, `.Params.instance` is not
 available inside the loop as `.` is now the loop variable.
 
-## Defining reusable templates
+## 定义可重复使用的模板
 
 Prometheus supports defining templates that can be reused. This is particularly
 powerful when combined with

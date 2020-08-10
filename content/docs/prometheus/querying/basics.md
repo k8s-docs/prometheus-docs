@@ -10,12 +10,12 @@ time. The result of an expression can either be shown as a graph, viewed as
 tabular data in Prometheus's expression browser, or consumed by external
 systems via the [HTTP API](api.md).
 
-## Examples
+## 例子
 
 This document is meant as a reference. For learning, it might be easier to
 start with a couple of [examples](examples.md).
 
-## Expression language data types
+## 表达式语言数据类型
 
 In Prometheus's expression language, an expression or sub-expression can
 evaluate to one of four types:
@@ -30,9 +30,9 @@ expression), only some of these types are legal as the result from a
 user-specified expression. For example, an expression that returns an instant
 vector is the only type that can be directly graphed.
 
-## Literals
+## 字面
 
-### String literals
+### 字符串常量
 
 Strings may be specified as literals in single quotes, double quotes or
 backticks.
@@ -51,7 +51,7 @@ Example:
     'these are unescaped: \n \\ \t'
     `these are not unescaped: \n ' " \t`
 
-### Float literals
+### 浮动文字
 
 Scalar float values can be written as literal integer or floating-point numbers in the format (whitespace only included for better readability):
 
@@ -71,9 +71,9 @@ Examples:
     -Inf
     NaN
 
-## Time series Selectors
+## 时间序列选择器
 
-### Instant vector selectors
+### 即时矢量选择
 
 Instant vector selectors allow the selection of a set of time series and a
 single sample value for each at a given timestamp (instant): in the simplest
@@ -140,7 +140,7 @@ A workaround for this restriction is to use the `__name__` label:
 All regular expressions in Prometheus use [RE2
 syntax](https://github.com/google/re2/wiki/Syntax).
 
-### Range Vector Selectors
+### 距矢量选择器
 
 Range vector literals work like instant vector literals, except that they
 select a range of samples back from the current instant. Syntactically, a [time
@@ -177,7 +177,7 @@ Here are some examples of valid time durations:
     5m
     10s
 
-### Offset modifier
+### 偏移变化
 
 The `offset` modifier allows changing the time offset for individual
 instant and range vectors in a query.
@@ -202,7 +202,7 @@ The same works for range vectors. This returns the 5-minute rate that
 
     rate(http_requests_total[5m] offset 1w)
 
-## Subquery
+## 子查询
 
 Subquery allows you to run an instant query for a given range and resolution. The result of a subquery is a range vector.
 
@@ -210,25 +210,25 @@ Syntax: `<instant_query> '[' <range> ':' [<resolution>] ']' [ offset <duration> 
 
 - `<resolution>` is optional. Default is the global evaluation interval.
 
-## Operators
+## 运营商
 
 Prometheus supports many binary and aggregation operators. These are described
 in detail in the [expression language operators](operators.md) page.
 
-## Functions
+## 功能
 
 Prometheus supports several functions to operate on data. These are described
 in detail in the [expression language functions](functions.md) page.
 
-## Comments
+## 注释
 
 PromQL supports line comments that start with `#`. Example:
 
         # This is a comment
 
-## Gotchas
+## 陷阱
 
-### Staleness
+### 泄气
 
 When queries are run, timestamps at which to sample data are selected
 independently of the actual present time series data. This is mainly to support
@@ -254,7 +254,7 @@ latest collected sample is older than 5 minutes or after they are marked stale.
 Staleness will not be marked for time series that have timestamps included in
 their scrapes. Only the 5 minute threshold will be applied in that case.
 
-### Avoiding slow queries and overloads
+### 避免慢查询和过载
 
 If a query needs to operate on a very large amount of data, graphing it might
 time out or overload the server or browser. Thus, when constructing queries

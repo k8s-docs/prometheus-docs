@@ -9,7 +9,7 @@ to an external service. Whenever the alert expression results in one or more
 vector elements at a given point in time, the alert counts as active for these
 elements' label sets.
 
-### Defining alerting rules
+## 定义的警报规则
 
 Alerting rules are configured in Prometheus in the same way as [recording
 rules](recording_rules.md).
@@ -38,7 +38,7 @@ values can be templated.
 
 The `annotations` clause specifies a set of informational labels that can be used to store longer additional information such as alert descriptions or runbook links. The annotation values can be templated.
 
-#### Templating
+### 模板
 
 Label and annotation values can be templated using [console
 templates](https://prometheus.io/docs/visualization/consoles). The `$labels`
@@ -76,7 +76,7 @@ groups:
           description: "{{ $labels.instance }} has a median request latency above 1s (current value: {{ $value }}s)"
 ```
 
-### Inspecting alerts during runtime
+## 运行时检查警报
 
 To manually inspect which alerts are active (pending or firing), navigate to
 the "Alerts" tab of your Prometheus instance. This will show you the exact
@@ -88,7 +88,7 @@ The sample value is set to `1` as long as the alert is in the indicated active
 (pending or firing) state, and the series is marked stale when this is no
 longer the case.
 
-### Sending alert notifications
+## 发送警报通知
 
 Prometheus's alerting rules are good at figuring what is broken _right now_, but
 they are not a fully-fledged notification solution. Another layer is needed to

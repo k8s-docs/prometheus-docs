@@ -4,7 +4,7 @@ linkTitle: 例子
 weight: 4
 ---
 
-## Simple time series selection
+## 简单的时间序列的选择
 
 Return all time series with the metric `http_requests_total`:
 
@@ -35,7 +35,7 @@ To select all HTTP status codes except 4xx ones, you could run:
 
     http_requests_total{status!~"4.."}
 
-## Subquery
+## 子查询
 
 Return the 5-minute rate of the `http_requests_total` metric for the past 30 minutes, with a resolution of 1 minute.
 
@@ -45,7 +45,7 @@ This is an example of a nested subquery. The subquery for the `deriv` function u
 
     max_over_time(deriv(rate(distance_covered_total[5s])[30s:5s])[10m:])
 
-## Using functions, operators, etc.
+## 使用功能，运营商等。
 
 Return the per-second rate for all time series with the `http_requests_total`
 metric name, as measured over the last 5 minutes:

@@ -3,12 +3,10 @@ title: HTTP API
 weight: 7
 ---
 
-# HTTP API
-
 The current stable HTTP API is reachable under `/api/v1` on a Prometheus
 server. Any non-breaking additions will be added under that endpoint.
 
-## Format overview
+## 格式概述
 
 The API response format is JSON. Every successful API request returns a `2xx`
 status code.
@@ -62,13 +60,13 @@ For example, `5m` refers to a duration of 5 minutes.
 
 `<bool>` placeholders refer to boolean values (strings `true` and `false`).
 
-## Expression queries
+## 表达查询
 
 Query language expressions may be evaluated at a single instant or over a range
 of time. The sections below describe the API endpoints for each type of
 expression query.
 
-### Instant queries
+### 即时查询
 
 The following endpoint evaluates an instant query at a single point in time:
 
@@ -134,7 +132,7 @@ $ curl 'http://localhost:9090/api/v1/query?query=up&time=2015-07-01T20:10:51.781
 }
 ```
 
-### Range queries
+### 范围查询
 
 The following endpoint evaluates an expression query over a range of time:
 
@@ -207,9 +205,9 @@ $ curl 'http://localhost:9090/api/v1/query_range?query=up&start=2015-07-01T20:10
 }
 ```
 
-## Querying metadata
+## 元数据查询
 
-### Finding series by label matchers
+### 通过查找标签匹配器系列
 
 The following endpoint returns the list of time series that match a certain label set.
 
@@ -259,7 +257,7 @@ $ curl -g 'http://localhost:9090/api/v1/series?' --data-urlencode 'match[]=up' -
 }
 ```
 
-### Getting label names
+### 获取标签名称
 
 The following endpoint returns a list of label names:
 
@@ -307,7 +305,7 @@ $ curl 'localhost:9090/api/v1/labels'
 }
 ```
 
-### Querying label values
+### 查询标签值
 
 The following endpoint returns a list of label values for a provided label name:
 
@@ -335,7 +333,7 @@ $ curl http://localhost:9090/api/v1/label/job/values
 }
 ```
 
-## Expression query result formats
+## 表达查询结果的格式
 
 Expression queries may return the following response values in the `result`
 property of the `data` section. `<sample_value>` placeholders are numeric
@@ -343,7 +341,7 @@ sample values. JSON does not support special float values such as `NaN`, `Inf`,
 and `-Inf`, so sample values are transferred as quoted JSON strings rather than
 raw numbers.
 
-### Range vectors
+### 距离向量
 
 Range vectors are returned as result type `matrix`. The corresponding
 `result` property has the following format:
@@ -358,7 +356,7 @@ Range vectors are returned as result type `matrix`. The corresponding
 ]
 ```
 
-### Instant vectors
+### 即时向量
 
 Instant vectors are returned as result type `vector`. The corresponding
 `result` property has the following format:
@@ -373,7 +371,7 @@ Instant vectors are returned as result type `vector`. The corresponding
 ]
 ```
 
-### Scalars
+### 标量
 
 Scalar results are returned as result type `scalar`. The corresponding
 `result` property has the following format:
@@ -382,7 +380,7 @@ Scalar results are returned as result type `scalar`. The corresponding
 [ <unix_time>, "<scalar_value>" ]
 ```
 
-### Strings
+### 字符串
 
 String results are returned as result type `string`. The corresponding
 `result` property has the following format:
@@ -391,7 +389,7 @@ String results are returned as result type `string`. The corresponding
 [ <unix_time>, "<string_value>" ]
 ```
 
-## Targets
+## 目标
 
 The following endpoint returns an overview of the current state of the
 Prometheus target discovery:
@@ -478,7 +476,7 @@ $ curl 'http://localhost:9090/api/v1/targets?state=active'
 }
 ```
 
-## Rules
+## 规则
 
 The `/rules` API endpoint returns a list of alerting and recording rules that
 are currently loaded. In addition it returns the currently active alerts fired
@@ -547,7 +545,7 @@ $ curl http://localhost:9090/api/v1/rules
 }
 ```
 
-## Alerts
+## 警报
 
 The `/alerts` endpoint returns a list of all active alerts.
 
@@ -579,7 +577,7 @@ $ curl http://localhost:9090/api/v1/alerts
 }
 ```
 
-## Querying target metadata
+## 查询目标元数据
 
 The following endpoint returns metadata about metrics currently scraped from targets.
 This is **experimental** and might change in the future.
@@ -665,7 +663,7 @@ curl -G http://localhost:9091/api/v1/targets/metadata \
 }
 ```
 
-## Querying metric metadata
+## 查询度量元
 
 It returns metadata about metrics currently scrapped from targets. However, it does not provide any target information.
 This is considered **experimental** and might change in the future.
@@ -766,11 +764,11 @@ $ curl http://localhost:9090/api/v1/alertmanagers
 }
 ```
 
-## Status
+## 状态
 
 Following status endpoints expose current Prometheus configuration.
 
-### Config
+### 配置
 
 The following endpoint returns currently loaded configuration file:
 
@@ -791,7 +789,7 @@ $ curl http://localhost:9090/api/v1/status/config
 }
 ```
 
-### Flags
+### 旗
 
 The following endpoint returns flag values that Prometheus was configured with:
 
@@ -818,7 +816,7 @@ $ curl http://localhost:9090/api/v1/status/flags
 
 _New in v2.2_
 
-### Runtime Information
+### 运行时信息
 
 The following endpoint returns various runtime information properties about the Prometheus server:
 
@@ -853,7 +851,7 @@ $ curl http://localhost:9090/api/v1/status/runtimeinfo
 
 _New in v2.14_
 
-### Build Information
+### 构建信息
 
 The following endpoint returns various build information properties about the Prometheus server:
 
@@ -882,7 +880,7 @@ $ curl http://localhost:9090/api/v1/status/buildinfo
 
 _New in v2.14_
 
-### TSDB Stats
+### TSDB 统计
 
 The following endpoint returns various cardinality statistics about the Prometheus TSDB:
 
@@ -946,13 +944,13 @@ $ curl http://localhost:9090/api/v1/status/tsdb
 
 _New in v2.15_
 
-## TSDB Admin APIs
+## TSDB 管理 API
 
 These are APIs that expose database functionalities for the advanced user. These APIs are not enabled unless the `--web.enable-admin-api` is set.
 
 We also expose a gRPC API whose definition can be found [here](https://github.com/prometheus/prometheus/blob/master/prompb/rpc.proto). This is experimental and might change in the future.
 
-### Snapshot
+### 快照
 
 Snapshot creates a snapshot of all current data into `snapshots/<datetime>-<rand>` under the TSDB's data directory and returns the directory as response.
 It will optionally skip snapshotting data that is only present in the head block, and which has not yet been compacted to disk.
@@ -980,7 +978,7 @@ The snapshot now exists at `<data-dir>/snapshots/20171210T211224Z-2be650b6d019eb
 
 _New in v2.1 and supports PUT from v2.9_
 
-### Delete Series
+### 删除系列
 
 DeleteSeries deletes data for a selection of series in a time range. The actual data still exists on disk and is cleaned up in future compactions or can be explicitly cleaned up by hitting the Clean Tombstones endpoint.
 
@@ -1008,7 +1006,7 @@ $ curl -X POST \
 
 _New in v2.1 and supports PUT from v2.9_
 
-### Clean Tombstones
+### 清洁墓碑
 
 CleanTombstones removes the deleted data from disk and cleans up the existing tombstones. This can be used after deleting series to free up space.
 

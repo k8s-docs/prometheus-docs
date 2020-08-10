@@ -1,14 +1,13 @@
 ---
-title: 普罗米修斯2.0迁移指南
+title: Prometheus2.0迁移指南
 linkTitle: 迁移
 weight: 8
 ---
 
-In line with our [stability promise](https://prometheus.io/blog/2016/07/18/prometheus-1-0-released/#fine-print),
-the Prometheus 2.0 release contains a number of backwards incompatible changes.
-This document offers guidance on migrating from Prometheus 1.8 to Prometheus 2.0.
+排队 与我们的[稳定性的承诺](https://prometheus.io/blog/2016/07/18/prometheus-1-0-released/#fine-print),普罗米修斯 2.0 版本包含了若干向后不兼容的改变.
+该文件提供了有关迁移普罗米修斯 1.8 至 2.0 普罗米修斯指导.
 
-## Flags
+## 标签
 
 The format of the Prometheus command line flags has changed. Instead of a
 single dash, all flags now use a double dash. Common flags (`--config.file`,
@@ -34,7 +33,7 @@ Some notable flags which have been removed:
   storage flags, and will fail to start if they are supplied. To write to
   InfluxDB, Graphite, or OpenTSDB use the relevant storage adapter.
 
-## Alertmanager service discovery
+## Alertmanager 服务发现
 
 Alertmanager service discovery was introduced in Prometheus 1.4, allowing Prometheus
 to dynamically discover Alertmanager replicas using the same mechanism as scrape
@@ -80,7 +79,7 @@ alerting:
           action: drop
 ```
 
-## Recording rules and alerts
+## 录制规则和通知
 
 The format for configuring alerting and recording rules has been changed to YAML.
 An example of a recording rule and alert in the old format:
@@ -121,7 +120,7 @@ $ promtool update rules example.rules
 
 Note that you will need to use promtool from 2.0, not 1.8.
 
-## Storage
+## 存储
 
 The data format in Prometheus 2.0 has completely changed and is not backwards
 compatible with 1.8. To retain access to your historic monitoring data we
@@ -162,9 +161,9 @@ The following features have been removed from PromQL:
 See [issue #3060](https://github.com/prometheus/prometheus/issues/3060) for more
 details.
 
-## Miscellaneous
+## 杂
 
-### Prometheus non-root user
+### Prometheus 非根用户
 
 The Prometheus Docker image is now built to [run Prometheus
 as a non-root user](https://github.com/prometheus/prometheus/pull/2859). If you
@@ -190,7 +189,7 @@ If you're using Docker, then the following snippet would be used:
 docker run -p 9090:9090 prom/prometheus:latest
 ```
 
-### Prometheus lifecycle
+### Prometheus 生命周期
 
 If you use the Prometheus `/-/reload` HTTP endpoint to [automatically reload your
 Prometheus config when it changes](configuration/configuration.md),

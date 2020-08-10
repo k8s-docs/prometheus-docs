@@ -1,5 +1,6 @@
 ---
 title: 单元测试规则
+linkTitle: 单元测试
 weight: 6
 ---
 
@@ -13,7 +14,7 @@ You can use `promtool` to test your rules.
 ./promtool test rules test1.yml test2.yml test3.yml
 ```
 
-## Test file format
+## 测试文件格式
 
 ```yaml
 # This is a list of rule files to consider for testing. Globs are supported.
@@ -122,7 +123,7 @@ labels: <string>
 value: <number>
 ```
 
-## Example
+## 例
 
 This is an example input file for unit testing which passes the test. `test.yml` is the test file which follows the syntax above and `alerts.yml` contains the alerting rules.
 

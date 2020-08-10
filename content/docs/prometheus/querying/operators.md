@@ -3,13 +3,13 @@ title: 运营商
 weight: 2
 ---
 
-## Binary operators
+## 二元运算符
 
 Prometheus's query language supports basic logical and arithmetic operators.
 For operations between two instant vectors, the [matching behavior](#vector-matching)
 can be modified.
 
-### Arithmetic binary operators
+### 算术二元运算符
 
 The following binary arithmetic operators exist in Prometheus:
 
@@ -38,7 +38,7 @@ grouping labels becoming the output label set. The metric name is dropped. Entri
 for which no matching entry in the right-hand vector can be found are not part of
 the result.
 
-### Comparison binary operators
+### 比较二元运算符
 
 The following binary comparison operators exist in Prometheus:
 
@@ -73,7 +73,7 @@ If the `bool` modifier is provided, vector elements that would have been
 dropped instead have the value `0` and vector elements that would be kept have
 the value `1`, with the grouping labels again becoming the output label set.
 
-### Logical/set binary operators
+### 逻辑/套二元运算符
 
 These logical/set binary operators are only defined between instant vectors:
 
@@ -94,13 +94,13 @@ which do not have matching label sets in `vector1`.
 `vector1` for which there are no elements in `vector2` with exactly matching
 label sets. All matching elements in both vectors are dropped.
 
-## Vector matching
+## 矢量匹配
 
 Operations between vectors attempt to find a matching element in the right-hand side
 vector for each entry in the left-hand side. There are two basic types of
 matching behavior: One-to-one and many-to-one/one-to-many.
 
-### One-to-one vector matches
+### 一到一个向量匹配
 
 **One-to-one** finds a unique pair of entries from each side of the operation.
 In the default case, that is an operation following the format `vector1 <operator> vector2`.
@@ -135,7 +135,7 @@ The entries with methods `put` and `del` have no match and will not show up in t
     {method="get"}  0.04            //  24 / 600
     {method="post"} 0.05            //   6 / 120
 
-### Many-to-one and one-to-many vector matches
+### 多到一和一对多向量匹配
 
 **Many-to-one** and **one-to-many** matchings refer to the case where each vector element on
 the "one"-side can match with multiple elements on the "many"-side. This has to
@@ -175,7 +175,7 @@ left:
 _Many-to-one and one-to-many matching are advanced use cases that should be carefully considered.
 Often a proper use of `ignoring(<labels>)` provides the desired outcome._
 
-## Aggregation operators
+## 汇聚运营商
 
 Prometheus supports the following built-in aggregation operators that can be
 used to aggregate the elements of a single instant vector, resulting in a new
@@ -254,7 +254,7 @@ To get the 5 largest HTTP requests counts across all instances we could write:
 
     topk(5, http_requests_total)
 
-## Binary operator precedence
+## 二进制运算符优先级
 
 The following list shows the precedence of binary operators in Prometheus, from
 highest to lowest.

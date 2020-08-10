@@ -8,20 +8,16 @@ Federation 允许 Prometheus 服务器从另一个 Prometheus 服务器刮选定
 ## 用例
 
 有不同的使用情况进行联盟。
-常用, 它是用来实现任一可伸缩的普罗米修斯监控设置或拉动相关指标从一个服务的普罗米修斯到另一个.
+常用, 它是用来实现任一可伸缩的 Prometheus 监控设置或拉动相关指标从一个服务的 Prometheus 到另一个.
 
 ### 层次联邦
 
-Hierarchical federation allows Prometheus to scale to environments with tens of
-data centers and millions of nodes. In this use case, the federation topology
-resembles a tree, with higher-level Prometheus servers collecting aggregated
-time series data from a larger number of subordinated servers.
+层次联邦允许普罗米修斯规模化环境 几十数据中心和几百万个节点.
+在这种情况下使用, 联邦拓扑结构类似于树, 与更高级别的普罗米修斯服务器 收集聚集的时间序列数据 从次级服务器更大数量的.
 
-For example, a setup might consist of many per-datacenter Prometheus servers
-that collect data in high detail (instance-level drill-down), and a set of
-global Prometheus servers which collect and store only aggregated data
-(job-level drill-down) from those local servers. This provides an aggregate
-global view and detailed local views.
+例如, 一个设置可能由许多每个数据中心普罗米修斯服务器 在高细节数据收集 (实例级向下钻取),
+和一组全球普罗米修斯服务器 它收集和存储仅汇总数据 (作业级向下钻取) 从这些本地服务器.
+这提供了全局总图和详细的地方意见.
 
 ### 跨服联盟
 

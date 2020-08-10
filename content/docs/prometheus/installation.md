@@ -3,18 +3,18 @@ title: 安装
 weight: 2
 ---
 
-## Using pre-compiled binaries
+## 使用预编译的二进制文件
 
 We provide precompiled binaries for most official Prometheus components. Check
 out the [download section](https://prometheus.io/download) for a list of all
 available versions.
 
-## From source
+## 从源
 
 For building Prometheus components from source, see the `Makefile` targets in
 the respective repository.
 
-## Using Docker
+## 运用 Docker
 
 All Prometheus services are available as Docker images on
 [Quay.io](https://quay.io/repository/prometheus/prometheus) or
@@ -31,7 +31,7 @@ pattern to ease managing the data on Prometheus upgrades.
 To provide your own configuration, there are several options. Here are
 two examples.
 
-### Volumes & bind-mount
+### 卷 & 绑定贴装
 
 Bind-mount your `prometheus.yml` from the host by running:
 
@@ -51,15 +51,14 @@ docker run \
     prom/prometheus
 ```
 
-### Custom image
+### 自定义镜像
 
 To avoid managing a file on the host and bind-mount it, the
 configuration can be baked into the image. This works well if the
 configuration itself is rather static and the same across all
 environments.
 
-For this, create a new directory with a Prometheus configuration and a
-`Dockerfile` like this:
+For this, create a new directory with a Prometheus configuration and a `Dockerfile` like this:
 
 ```Dockerfile
 FROM prom/prometheus
@@ -76,10 +75,9 @@ docker run -p 9090:9090 my-prometheus
 A more advanced option is to render the configuration dynamically on start
 with some tooling or even have a daemon update it periodically.
 
-## Using configuration management systems
+## 使用配置管理系统
 
-If you prefer using configuration management systems you might be interested in
-the following third-party contributions:
+如果你喜欢使用配置管理系统 你可能会喜欢下面的第三方贡献:
 
 ### Ansible
 

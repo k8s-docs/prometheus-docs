@@ -5,11 +5,11 @@ weight: 5
 
 Prometheus includes a local on-disk time series database, but also optionally integrates with remote storage systems.
 
-## Local storage
+## 本地存储
 
 Prometheus's local time series database stores time series data in a custom format on disk.
 
-### On-disk layout
+### 磁盘布局
 
 Ingested samples are grouped into blocks of two hours. Each two-hour block consists of a directory containing one or more chunk files that contain all time series samples for that window of time, as well as a metadata file and index file (which indexes metric names and labels to time series in the chunk files). When series are deleted via the API, deletion records are stored in separate tombstone files (instead of deleting the data immediately from the chunk files).
 
@@ -49,13 +49,13 @@ Alternatively, external storage may be used via the [remote read/write APIs](htt
 
 For further details on file format, see [TSDB format](/tsdb/docs/format/README.md).
 
-## Compaction
+## 压实
 
 The initial two-hour blocks are eventually compacted into longer blocks in the background.
 
 Compaction will create larger blocks up to 10% of the retention time, or 31 days, whichever is smaller.
 
-## Operational aspects
+## 操作方面
 
 Prometheus has several flags that allow configuring the local storage. The most important ones are:
 
@@ -81,11 +81,11 @@ If both time and size retention policies are specified, whichever policy trigger
 
 Expired block cleanup happens on a background schedule. It may take up to two hours to remove expired blocks. Expired blocks must be fully expired before they are cleaned up.
 
-## Remote storage integrations
+## 远程存储整合
 
 Prometheus's local storage is limited by single nodes in its scalability and durability. Instead of trying to solve clustered storage in Prometheus itself, Prometheus has a set of interfaces that allow integrating with remote storage systems.
 
-### Overview
+### 概观
 
 Prometheus integrates with remote storage systems in two ways:
 
@@ -102,6 +102,6 @@ For details on the request and response messages, see the [remote storage protoc
 
 Note that on the read path, Prometheus only fetches raw series data for a set of label selectors and time ranges from the remote end. All PromQL evaluation on the raw data still happens in Prometheus itself. This means that remote read queries have some scalability limit, since all necessary data needs to be loaded into the querying Prometheus server first and then processed there. However, supporting fully distributed evaluation of PromQL was deemed infeasible for the time being.
 
-### Existing integrations
+### 现有集成
 
 To learn more about existing integrations with remote storage systems, see the [Integrations documentation](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage).
